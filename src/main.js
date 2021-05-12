@@ -1,6 +1,6 @@
 'use strict';
 import Phaser from 'phaser';
-import GameScene from './src/scenes/GameScene';
+import GameScene from './scenes/GameScene';
 
 const config = {
   type: Phaser.AUTO,
