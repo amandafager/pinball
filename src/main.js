@@ -18,6 +18,9 @@ const config = {
       debug: true,
     },
   },
+  game: {
+    balls: 3,
+  },
 };
 
 export default new Phaser.Game(config);
