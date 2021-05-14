@@ -1,34 +1,56 @@
-export default class objectCreator {
-  constructor(scene, typeOfObject, x, y, width, height, color) {
+import { paths, collisionGroups } from './functions';
+export default class createObjects extends Phaser.Scene {
+  constructor(scene, positionX, positionY, name, group = null) {
+    super(scene);
     this.scene = scene;
-    this.typeOfObject = typeOfObject;
-    this.x = x;
-    this.y = y;
-    this.width = width;
-    this.height = height;
-    this.color = color;
-    this.createObject();
+    this.positionX = positionX;
+    this.positionY = positionY;
+    this.name = name;
+    this.group = group;
+    this.drawShape();
   }
 
-  gameConfig() {
-    const width = 800;
-    const height = 1200;
-    return { width, height };
-  }
+  drawShape() {
+    let pathWay;
+    let object = this.scene.matter.add.image(
+      this.positionX,
+      this.positionY,
+      this.name,
+      null
+    );
 
-  createObject() {
-    if (this.typeOfObject == 'rectangle') {
-      let object = this.scene.add.rectangle(
-        this.x,
-        this.y,
-        this.width,
-        this.height,
-        this.color
-      );
-      this.scene.matter.add.gameObject(object, {
-        isStatic: true,
-      });
+    if (this.name == 'leftBumper') {
+      pathWay = paths().pointerBumper;
     }
-    return objectCreator;
+    if (this.name == 'rightBumper') {
+      pathWay = paths().rightPointerBumper;
+    }
+    if (this.name == 'topBumper') {
+      pathWay = paths().topBumper;
+    }
+    if (this.name == 'topHalfMoon') {
+      pathWay = paths().topHalfMoon;
+      object.setStatic(true);
+    }
+
+    if (this.name == 'sideX') {
+      pathWay = paths().rails;
+    }
+    let objectName = this.name;
+
+    object.setExistingBody(
+      this.scene.matter.add.fromVertices(
+        this.positionX,
+        this.positionY,
+        pathWay
+      )
+    );
+
+    object.setStatic(true);
+    object.setVelocity(10, -10);
+    object.setCollisionCategory(4);
+    if (this.name == 'sideX') {
+      //   object.visible(false);
+    }
   }
 }
