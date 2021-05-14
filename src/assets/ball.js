@@ -11,7 +11,7 @@ export default class Ball extends Phaser.Physics.Matter.Image {
     scene.add.existing(this);
     this.setPosition(x, y);
     this.setTexture(texture);
-    this.scale = 0.5;
+    this.scale = 1.4;
     this.setBody({
       type: 'circle',
       radius: 16,
