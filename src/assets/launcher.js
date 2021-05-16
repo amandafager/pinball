@@ -52,7 +52,7 @@ export default class Launcher {
 
     if (pushLevel >= 7 && pushLevel <= 10) (vx = 0), (vy = -30);
 
-    if (pushLevel >= 11) (vx = 0), (vy = -50);
+    if (pushLevel >= 11) (vx = 0), (vy = -40);
 
     return { vx, vy };
   }
