@@ -1,0 +1,209 @@
+{
+  "textures": [
+    {
+      "image": "pinball-sprites.png",
+      "format": "RGBA8888",
+      "size": {
+        "w": 1214,
+        "h": 433
+      },
+      "scale": 1,
+      "frames": [
+        {
+          "filename": "leftRamp.png",
+          "rotated": false,
+          "trimmed": false,
+          "sourceSize": {
+            "w": 204,
+            "h": 420
+          },
+          "spriteSourceSize": {
+            "x": 0,
+            "y": 0,
+            "w": 204,
+            "h": 420
+          },
+          "frame": {
+            "x": 1,
+            "y": 1,
+            "w": 204,
+            "h": 420
+          }
+        },
+        {
+          "filename": "rightRamp.png",
+          "rotated": false,
+          "trimmed": false,
+          "sourceSize": {
+            "w": 204,
+            "h": 420
+          },
+          "spriteSourceSize": {
+            "x": 0,
+            "y": 0,
+            "w": 204,
+            "h": 420
+          },
+          "frame": {
+            "x": 207,
+            "y": 1,
+            "w": 204,
+            "h": 420
+          }
+        },
+        {
+          "filename": "topHalfMoon.png",
+          "rotated": false,
+          "trimmed": false,
+          "sourceSize": {
+            "w": 800,
+            "h": 229
+          },
+          "spriteSourceSize": {
+            "x": 0,
+            "y": 0,
+            "w": 800,
+            "h": 229
+          },
+          "frame": {
+            "x": 413,
+            "y": 1,
+            "w": 800,
+            "h": 229
+          }
+        },
+        {
+          "filename": "leftBumper.png",
+          "rotated": false,
+          "trimmed": false,
+          "sourceSize": {
+            "w": 114,
+            "h": 200
+          },
+          "spriteSourceSize": {
+            "x": 0,
+            "y": 0,
+            "w": 114,
+            "h": 200
+          },
+          "frame": {
+            "x": 413,
+            "y": 232,
+            "w": 114,
+            "h": 200
+          }
+        },
+        {
+          "filename": "rightBumper.png",
+          "rotated": false,
+          "trimmed": false,
+          "sourceSize": {
+            "w": 114,
+            "h": 200
+          },
+          "spriteSourceSize": {
+            "x": 0,
+            "y": 0,
+            "w": 114,
+            "h": 200
+          },
+          "frame": {
+            "x": 529,
+            "y": 232,
+            "w": 114,
+            "h": 200
+          }
+        },
+        {
+          "filename": "topBumper.png",
+          "rotated": false,
+          "trimmed": false,
+          "sourceSize": {
+            "w": 114,
+            "h": 114
+          },
+          "spriteSourceSize": {
+            "x": 0,
+            "y": 0,
+            "w": 114,
+            "h": 114
+          },
+          "frame": {
+            "x": 645,
+            "y": 232,
+            "w": 114,
+            "h": 114
+          }
+        },
+        {
+          "filename": "middle2x.png",
+          "rotated": false,
+          "trimmed": false,
+          "sourceSize": {
+            "w": 49,
+            "h": 70
+          },
+          "spriteSourceSize": {
+            "x": 0,
+            "y": 0,
+            "w": 49,
+            "h": 70
+          },
+          "frame": {
+            "x": 645,
+            "y": 348,
+            "w": 49,
+            "h": 70
+          }
+        },
+        {
+          "filename": "leftTrigger.png",
+          "rotated": false,
+          "trimmed": false,
+          "sourceSize": {
+            "w": 146,
+            "h": 106
+          },
+          "spriteSourceSize": {
+            "x": 0,
+            "y": 0,
+            "w": 146,
+            "h": 106
+          },
+          "frame": {
+            "x": 761,
+            "y": 232,
+            "w": 146,
+            "h": 106
+          }
+        },
+        {
+          "filename": "rightTrigger.png",
+          "rotated": false,
+          "trimmed": false,
+          "sourceSize": {
+            "w": 146,
+            "h": 106
+          },
+          "spriteSourceSize": {
+            "x": 0,
+            "y": 0,
+            "w": 146,
+            "h": 106
+          },
+          "frame": {
+            "x": 909,
+            "y": 232,
+            "w": 146,
+            "h": 106
+          }
+        }
+      ]
+    }
+  ],
+  "meta": {
+    "app": "https://www.codeandweb.com/texturepacker",
+    "version": "3.0",
+    "smartupdate": "$TexturePacker:SmartUpdate:c3f1a4922f7e080176d04e31a0705dbf:d0e121396c972d87af49c6a76e3e11d0:bee1b0df2f46961d5470e5d19364720e$"
+  }
+}

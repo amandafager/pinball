@@ -1,21 +1,30 @@
 import Phaser from 'phaser';
 import config from '../main';
+import Launcher from '../assets/launcher';
 // import objectCreator from '../assets/objectCreate';
 import createObjects from '../assets/objectCreate';
 import background from '../images/background.png';
-import topHalfMoon from '../images/topHalfMoon.png';
 import backgroundStripes from '../images/backgroundStripes.png';
+/* import topHalfMoon from '../images/topHalfMoon.png';
 import topBumper from '../images/topBumper.png';
 import leftBumper from '../images/leftBumper.png';
 import rightBumper from '../images/rightBumper.png';
+import leftRamp from '../images/leftRamp.png';
+import rightRamp from '../images/rightRamp.png'; */
 import Ball from '../assets/ball';
 import ballImage from '../images/ball.png';
+import shapes from '../assets/physics.json';
+import sheetJson from '../assets/pinball-sprites.json';
+import sheetPng from '../images/pinball-sprites.png';
+import Object from '../assets/object';
 
 export default class GameScene extends Phaser.Scene {
   constructor() {
     super('GameScene');
     this.gameWidth = config.scale.width;
     this.gameHeight = config.scale.height;
+    this.gameBalls = 3;
+    this.currentBall = 0;
   }
 
   preload() {
@@ -23,40 +32,88 @@ export default class GameScene extends Phaser.Scene {
     this.load.image('ball', ballImage);
     this.load.image('background', background);
     this.load.image('backgroundStripes', backgroundStripes);
-    this.load.image('topHalfMoon', topHalfMoon);
-    this.load.image('topBumper', topBumper);
-    this.load.image('leftBumper', leftBumper);
-    this.load.image('rightBumper', rightBumper);
+    this.load.atlas('sheet', sheetPng, sheetJson);
+    this.load.json('shapes', shapes);
+    
+
+    //this.load.image('topHalfMoon', topHalfMoon);
+    //this.load.image('topBumper', topBumper);
+    //this.load.image('leftBumper', leftBumper);
+    //this.load.image('rightBumper', rightBumper);
+    //this.load.image('leftRamp', leftRamp);
+    //this.load.image('rightRamp', rightRamp);
+    
   }
 
   create() {
-    this.matter.world.setBounds(0, 0, this.gameWidth, this.gameHeight);
+    const shapes = this.cache.json.get('shapes');
 
+    this.matter.world.setBounds(0, 0, this.gameWidth, this.gameHeight);
     this.back = this.add.image(0, 0, 'background').setOrigin(0, 0);
     this.back.scale = 1.15;
     this.backStrips = this.add.image(0, 0, 'backgroundStripes').setOrigin(0, 0);
-    // this.topHalfMoon = this.add.image(0, 0, 'topHalfMoon').setOrigin(0, 0);
-    new createObjects(this, 180, 890, 'leftBumper', this.collisionGroupB);
-    new createObjects(this, 540, 890, 'rightBumper', this.collisionGroupB);
-    new createObjects(this, this.gameWidth * 0.5 -100, 100, 'topHalfMoon', this.collisionGroupB);
-    new createObjects(this, this.gameWidth * 0.3, 250, 'topBumper', this.collisionGroupB);
-    new createObjects(this, this.gameWidth * 0.5, 360, 'topBumper', this.collisionGroupB);
-    new createObjects(this, this.gameWidth * 0.7, 250, 'topBumper', this.collisionGroupB);
 
-    this.ball = new Ball(this, this.gameWidth - 30, this.gameHeight - 200, 'ball');
-    this.resetBall();
+    // this.topHalfMoon = this.add.image(0, 0, 'topHalfMoon').setOrigin(0, 0);
+    //new createObjects(this, 180, 890, 'leftBumper', this.collisionGroupB);
+    //new createObjects(this, 540, 890, 'rightBumper', this.collisionGroupB);
+    //new createObjects(this, this.gameWidth * 0.5 -100, 100, 'topHalfMoon', this.collisionGroupB);
+    //new createObjects(this, this.gameWidth * 0.3, 250, 'topBumper', this.collisionGroupB);
+    //new createObjects(this, this.gameWidth * 0.5, 360, 'topBumper', this.collisionGroupB);
+    //new createObjects(this, this.gameWidth * 0.7, 250, 'topBumper', this.collisionGroupB);
+
+    const topHalfMoon = new Object(this, 400, 68, "sheet", "topHalfMoon.png", shapes.topHalfMoon);
+    const topBumperOne = new Object(this, this.gameWidth * 0.3, 250, "sheet", "topBumper.png", shapes.topBumper);
+    const topBumperTwo = new Object(this, this.gameWidth * 0.5, 360, "sheet", "topBumper.png", shapes.topBumper);
+    const topBumperThree = new Object(this, this.gameWidth * 0.7, 250, "sheet", "topBumper.png", shapes.topBumper);
+    const leftBumper =new Object(this, this.gameWidth * 0.25, this.gameHeight * 0.7, "sheet", "leftBumper.png", shapes.leftBumper);
+    const rightBumper =new Object(this, this.gameWidth - this.gameWidth * 0.25, this.gameHeight * 0.7, "sheet", "rightBumper.png", shapes.rightBumper);
+    const leftRamp =new Object(this, this.gameWidth * 0.14, this.gameHeight * 0.75, "sheet", "leftRamp.png", shapes.leftRamp);
+    const rightRamp =new Object(this, this.gameWidth - this.gameWidth * 0.14, this.gameHeight * 0.75, "sheet", "rightRamp.png", shapes.rightRamp);
+    const leftTrigger =new Object(this, this.gameWidth * 0.367, this.gameHeight * 0.899, "sheet", "leftTrigger.png", shapes.leftTrigger);
+    const rightTrigger =new Object(this, this.gameWidth - this.gameWidth * 0.367, this.gameHeight * 0.899, "sheet", "rightTrigger.png", shapes.rightTrigger);
+   
+
+    this.launcher = new Launcher(
+      this,
+      this.gameWidth - 40,
+      this.gameHeight - 40,
+      50,
+      this.ball
+    );
+    this.newGame();
+    console.log(this.currentBall);
+    // this.launcher.preUpdate(this.ball);
+  }
+
+  newGame() {
+    console.log('NEW GAME');
+    this.ball = new Ball(
+      this,
+      this.gameWidth - 30,
+      this.gameHeight - 200,
+      'ball',
+      this.launcher
+    );
   }
 
   resetBall() {
-    if (this.ball.y > this.gameHeight - 20) {
-      console.log('Reset');
-      this.ball.destroy();
-      this.ball = new Ball(this, this.gameWidth - 30, this.gameHeight - 200, 'ball');
-      //this.launcher.attachBallOnLaunch(this.ball);
+    if (this.gameBalls > 1) {
+      if (this.ball.y > this.gameHeight - 20) {
+        console.log(this.gameBalls);
+        this.gameBalls = this.gameBalls - 1;
+        this.currentBall++;
+        this.ball = new Ball(
+          this,
+          this.gameWidth - 30,
+          this.gameHeight - 200,
+          'ball',
+          this.launcher
+        );
+      }
     }
   }
 
   update() {
-    //this.resetBall();
+    this.resetBall();
   }
 }
