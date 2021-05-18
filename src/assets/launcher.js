@@ -9,10 +9,8 @@ export default class Launcher {
     this.x = x;
     this.y = y;
     this.ball = ball;
-
     this.drawShape();
     this.releaseBall(this.ball);
-
     this.fill = 0;
     this.debug = this.scene.add.graphics();
     this.spacePushed = this.scene.input.keyboard.addKey('space');
