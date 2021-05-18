@@ -16,9 +16,10 @@ export default class Ball extends Phaser.Physics.Matter.Image {
       radius: 18,
     });
     this.setAngularVelocity(0.01);
-    this.setBounce(0.6);
-    this.setFrictionAir(3);
-    this.setFriction(0, 0, 0);
+    this.setBounce(0 /* 0.6 */);
+    this.setFrictionAir(0.0001 /* 1 */);
+    this.setDensity(0.001);
+    this.setFriction(0 /* 0, 0, 0 */);
     this.setData('onStart', true);
     this.preUpdate();
     this.ballCollsion();

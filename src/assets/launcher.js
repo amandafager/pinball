@@ -13,7 +13,6 @@ export default class Launcher {
 
     this.drawShape();
     this.releaseBall(this.ball);
-
     this.fill = 0;
     this.debug = this.scene.add.graphics();
     this.spacePushed = this.scene.input.keyboard.addKey('space');
