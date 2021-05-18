@@ -7,7 +7,6 @@ import background from '../images/background.png';
 import backgroundStripes from '../images/backgroundStripes.png';
  import topHalfMoon from '../images/topHalfMoon.png';
 import topBumper from '../images/topBumper.png';
-import leftBumper from '../images/leftBumper.png';
 import rightBumper from '../images/rightBumper.png';
 import leftRamp from '../images/leftRamp.png';
 import rightRamp from '../images/rightRamp.png';
@@ -17,6 +16,12 @@ import shapes from '../assets/physics3.json';
 import sheetJson from '../assets/pinball-sprites.json';
 import sheetPng from '../images/pinball-sprites.png';
 import Object from '../assets/object';
+
+import Flipper from '../assets/flippers';
+import LeftTrigger from '../images/leftTrigger.png';
+import RightTrigger from '../images/rightTrigger.png';
+import leftBumper from '../images/leftBumper.png';
+import spring from '../images/spring.png';
 
 export default class GameScene extends Phaser.Scene {
  
@@ -35,9 +40,15 @@ export default class GameScene extends Phaser.Scene {
     this.matter.world.update60Hz();
     this.load.image('ball', ballImage);
     this.load.image('background', background);
+    this.load.image('LeftTrigger', LeftTrigger);
+    this.load.image('RightTrigger', RightTrigger);
+    this.load.image('leftBumper', leftBumper);
     this.load.image('backgroundStripes', backgroundStripes);
+    this.load.image('spring', spring);
     this.load.atlas('sheet', sheetPng, sheetJson);
     this.load.json('shapes', shapes);
+    
+   
     
 
     //this.load.image('topHalfMoon', topHalfMoon);
@@ -51,9 +62,6 @@ export default class GameScene extends Phaser.Scene {
 
   create() {
     const shapes = this.cache.json.get('shapes');
-
-  
-
     this.matter.world.setBounds(0, 0, this.gameWidth, this.gameHeight);
     this.back = this.add.image(0, 0, 'background').setOrigin(0, 0);
     this.back.scale = 1.15;
@@ -71,34 +79,70 @@ export default class GameScene extends Phaser.Scene {
     //new createObjects(this, this.gameWidth * 0.5, 360, 'topBumper', this.collisionGroupB);
     //new createObjects(this, this.gameWidth * 0.7, 250, 'topBumper', this.collisionGroupB);
 
+    
+
+    const aPushed = this.input.keyboard.addKey('A');
+    const dPushed = this.input.keyboard.addKey('D');
+
+    aPushed.on(
+      'down',
+      function () {
+        leftFlipper.flip();
+      },
+      this
+    );
+
+    aPushed.on(
+      'up',
+      function () {
+       leftFlipper.release();
+      },
+      this
+    );
+
+    dPushed.on(
+      'down',
+      function () {
+        rightFlipper.flip();
+      },
+      this
+    );
+
+    dPushed.on(
+      'up',
+      function () {
+       rightFlipper.release();
+      },
+      this
+    );
+
+
+
     const topHalfMoon = new Object(this, 400, 68, "sheet", "topHalfMoon.png", shapes.topHalfMoon);
     const topBumperOne = new Object(this, this.gameWidth * 0.3, 250, "sheet", "topBumper.png", shapes.topBumper);
     const topBumperTwo = new Object(this, this.gameWidth * 0.5, 360, "sheet", "topBumper.png", shapes.topBumper);
     const topBumperThree = new Object(this, this.gameWidth * 0.7, 250, "sheet", "topBumper.png", shapes.topBumper);
-    const leftBumper =new Object(this, this.gameWidth * 0.25, this.gameHeight * 0.7, "sheet", "leftBumper.png", shapes.leftBumper);
-    const rightBumper =new Object(this, this.gameWidth - this.gameWidth * 0.25, this.gameHeight * 0.7, "sheet", "rightBumper.png", shapes.rightBumper);
-    const leftRamp =new Object(this, this.gameWidth * 0.14, this.gameHeight * 0.75, "sheet", "leftRamp.png", shapes.leftRamp);
-    const rightRamp =new Object(this, this.gameWidth - this.gameWidth * 0.14, this.gameHeight * 0.75, "sheet", "rightRamp.png", shapes.rightRamp);
-    //const leftTrigger =new Object(this, this.gameWidth * 0.367, this.gameHeight * 0.899, "sheet", "leftTrigger.png", shapes.leftTrigger);
-    //const rightTrigger =new Object(this, this.gameWidth - this.gameWidth * 0.367, this.gameHeight * 0.899, "sheet", "rightTrigger.png", shapes.rightTrigger);
-   
+    const leftBumper = new Object(this, this.gameWidth * 0.25, this.gameHeight * 0.7, "sheet", "leftBumper.png", shapes.leftBumper);
+    const rightBumper = new Object(this, this.gameWidth - this.gameWidth * 0.25, this.gameHeight * 0.7, "sheet", "rightBumper.png", shapes.rightBumper);
+    const leftRamp = new Object(this, this.gameWidth * 0.14, this.gameHeight * 0.75, "sheet", "leftRamp.png", shapes.leftRamp);
+    const rightRamp = new Object(this, this.gameWidth - this.gameWidth * 0.14, this.gameHeight * 0.75, "sheet", "rightRamp.png", shapes.rightRamp);
+    const leftFlipper = new Flipper(this, this.gameWidth * 0.31, this.gameHeight * 0.87, 'left', LeftTrigger);
+    const rightFlipper = new Flipper(this, this.gameWidth * 0.68, this.gameHeight * 0.87, 'right', RightTrigger);
 
     this.launcher = new Launcher(
       this,
       this.gameWidth - 30,
       this.gameHeight - 40,
       50,
-      this.ball, 
+      this.ball,
+      'spring'
     );
 
     let score = this.add.text(70, 0, 'Score: ' + this.score, { fontSize: 18 }).setOrigin(0.5).setDepth(1);
     this.activeBall = this.add.text(700, 0, 'Balls left: ' + this.gameBalls, { fontSize: 18 }).setOrigin(0.5).setDepth(1);
     
     this.newGame();
-    console.log(this.currentBall); 
-    console.log(this.gameBalls); 
-  
-    //this.launcher.preUpdate(this.ball);
+    console.log(this.currentBall);
   }
 
   newGame() {
