@@ -1,14 +1,15 @@
 import Phaser from 'phaser';
 
 export default class Launcher {
-  constructor(scene, x, y, width, ball) {
+  constructor(scene, x, y, width, ball, spring) {
     scene.add.existing(this);
     this.scene = scene;
     this.width = width;
-    this.height = 150;
+    this.height = 350;
     this.x = x;
     this.y = y;
     this.ball = ball;
+    this.spring = spring;
 
     this.drawShape();
     this.releaseBall(this.ball);
@@ -19,18 +20,58 @@ export default class Launcher {
   }
 
   drawShape() {
-    let startLaunchPaddle = this.scene.add.rectangle(
+    let startLaunchPaddle = this.scene.add.image(
       this.x,
       this.y,
-      this.width,
-      this.height,
-      0x0000ff
+      this.spring,
+      this.scene
     );
 
+    startLaunchPaddle.scaleX = 0.65;
     this.scene.matter.add.gameObject(startLaunchPaddle, {
       isStatic: true,
       friction: 0,
       label: 'launcher',
+    });
+
+    let launchPaddleLockSensor = this.scene.add.rectangle(
+      this.x + 10,
+      this.y * 0.6,
+      60,
+      10
+    );
+
+    this.scene.matter.add.gameObject(launchPaddleLockSensor, {
+      isSensor: true,
+      isStatic: true,
+      label: 'launchPaddleLockSensor',
+    });
+
+    this.launchPaddlePosition = startLaunchPaddle.y;
+    this.startLaunchPaddle = startLaunchPaddle;
+
+    this.launchPaddleLock = this.scene.add.rectangle(
+      this.x + 100,
+      this.y * 0.535,
+      90,
+      10,
+      0x000000
+    );
+    // console.log(this.launchPaddleLock);
+    this.scene.matter.add.gameObject(this.launchPaddleLock, {
+      isStatic: true,
+      label: 'launchPaddleLock',
+    });
+    this.launchPaddleLock.setAngle(-45);
+
+    this.scene.matter.world.on('collisionstart', function (event) {
+      let pairs = event.pairs;
+      event.pairs.forEach((pair) => {
+        const { bodyA, bodyB } = pair;
+        if (bodyA.label == 'launchPaddleLockSensor') {
+          // this.launchPaddleLock.setPosition(this.x + 10, this.y * 0.535, null);
+        }
+      });
     });
   }
 
@@ -67,6 +108,11 @@ export default class Launcher {
         this.pushLevel = 0;
         this.startTimer = setInterval(() => {
           this.pushLevel = this.pushLevel + 1;
+          this.startLaunchPaddle.setPosition(
+            this.startLaunchPaddle.x,
+            this.startLaunchPaddle.y + 2,
+            null
+          );
         }, 50);
       },
       this
@@ -76,10 +122,15 @@ export default class Launcher {
       'up',
       function () {
         clearInterval(this.startTimer);
-        console.log(this.pushLevel);
         let velocity = this.setBallVelocity(this.pushLevel);
-        console.log(velocity.vy);
         this.ball.updateVelocity(velocity.vx, velocity.vy);
+        setTimeout(() => {
+          this.startLaunchPaddle.setPosition(
+            this.startLaunchPaddle.x,
+            this.launchPaddlePosition,
+            null
+          );
+        }, 50);
       },
       this
     );
