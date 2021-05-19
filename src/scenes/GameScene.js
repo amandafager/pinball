@@ -22,6 +22,13 @@ import LeftTrigger from '../images/leftTrigger.png';
 import RightTrigger from '../images/rightTrigger.png';
 import leftBumper from '../images/leftBumper.png';
 import spring from '../images/spring.png';
+import blackDivider from '../images/black_divider.png';
+import closingPinRight from '../images/closingPinRight.png';
+import closingPinLeft from '../images/closingPinLeft.png';
+import leftSmallBumper from '../images/leftSmallBumper.png';
+import rightSmallBumper from '../images/rightSmallBumper.png';
+import twoTimes from '../images/2x.png';
+import blackHole from '../images/blackHole.png';
 
 export default class GameScene extends Phaser.Scene {
  
@@ -45,6 +52,13 @@ export default class GameScene extends Phaser.Scene {
     this.load.image('leftBumper', leftBumper);
     this.load.image('backgroundStripes', backgroundStripes);
     this.load.image('spring', spring);
+    this.load.image('blackDivider', blackDivider);
+    this.load.image('closingPinRight', closingPinRight);
+    this.load.image('closingPinLeft', closingPinLeft);
+    this.load.image('leftSmallBumper', leftSmallBumper);
+    this.load.image('rightSmallBumper', rightSmallBumper);
+    this.load.image('blackHole', blackHole);
+    this.load.image('twoTimes', twoTimes);
     this.load.atlas('sheet', sheetPng, sheetJson);
     this.load.json('shapes', shapes);
     
@@ -67,6 +81,10 @@ export default class GameScene extends Phaser.Scene {
     this.back.scale = 1.15;
     this.backStrips = this.add.image(0, 0, 'backgroundStripes').setOrigin(0, 0);
 
+    this.blackDividerRight = this.add.image(this.gameWidth - 50, this.gameHeight, 'blackDivider').setOrigin(1);
+    this.blackDividerLeft = this.add.image(90, this.gameHeight, 'blackDivider').setOrigin(1);
+    this.twoTimes = this.add.image(3, this.gameHeight - 150, 'twoTimes').setOrigin(0);
+    this.blackHole = this.add.image(3, this.gameHeight - 50, 'blackHole').setOrigin(0);
    
 
    
@@ -131,15 +149,16 @@ export default class GameScene extends Phaser.Scene {
 
     this.launcher = new Launcher(
       this,
-      this.gameWidth - 30,
+      this.gameWidth - 25,
       this.gameHeight - 40,
       50,
       this.ball,
-      'spring'
+      'spring',
+      'closingPinRight'
     );
 
-    let score = this.add.text(70, 0, 'Score: ' + this.score, { fontSize: 18 }).setOrigin(0.5).setDepth(1);
-    this.activeBall = this.add.text(700, 0, 'Balls left: ' + this.gameBalls, { fontSize: 18 }).setOrigin(0.5).setDepth(1);
+    let score = this.add.text(70, 0, 'Score: ' + this.score, { fontSize: 18 }).setOrigin(0).setDepth(1);
+    this.activeBall = this.add.text(600, 0, 'Balls left: ' + this.gameBalls, { fontSize: 18 }).setOrigin(0).setDepth(1);
     
     this.newGame();
     console.log(this.currentBall);
@@ -162,7 +181,7 @@ export default class GameScene extends Phaser.Scene {
       this.launcher
     );
     this.currentBall++; 
-
+    
   }
 
   resetBall() {
@@ -172,6 +191,7 @@ export default class GameScene extends Phaser.Scene {
         this.activeBall.text = 'Balls left: ' + this.gameBalls;
         console.log("game balls " + this.gameBalls);
         console.log("current ball " + this.currentBall);
+        this.launcher.resetValves();
       }
   }
 
