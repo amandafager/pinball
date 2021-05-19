@@ -27,7 +27,7 @@
     "dist"
   ],
   "staticFiles": {
-    "staticPath": "public",
+    "staticPath": "src",
     "watcherGlob": "**"
   },
   "private": true,
