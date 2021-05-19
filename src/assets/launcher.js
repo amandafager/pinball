@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
 
 export default class Launcher {
-  constructor(scene, x, y, width, ball, spring) {
+  constructor(scene, x, y, width, ball, spring, closingPinRight) {
     scene.add.existing(this);
     this.scene = scene;
     this.width = width;
@@ -10,12 +10,15 @@ export default class Launcher {
     this.y = y;
     this.ball = ball;
     this.spring = spring;
+    this.closingPinRight = closingPinRight;
+    this.colliding = false;
 
     this.drawShape();
     this.releaseBall(this.ball);
     this.fill = 0;
     this.debug = this.scene.add.graphics();
     this.spacePushed = this.scene.input.keyboard.addKey('space');
+    this.collisionTest();
   }
 
   drawShape() {
@@ -26,7 +29,6 @@ export default class Launcher {
       this.scene
     );
 
-    startLaunchPaddle.scaleX = 0.65;
     this.scene.matter.add.gameObject(startLaunchPaddle, {
       isStatic: true,
       friction: 0,
@@ -49,26 +51,43 @@ export default class Launcher {
     this.launchPaddlePosition = startLaunchPaddle.y;
     this.startLaunchPaddle = startLaunchPaddle;
 
-    this.launchPaddleLock = this.scene.add.rectangle(
-      this.x + 100,
-      this.y * 0.535,
-      90,
-      10,
-      0x000000
+    this.launchPaddleLock = this.scene.add.image(
+      this.x + 0,
+      this.y * 0.88,
+      'closingPinRight'
     );
-    // console.log(this.launchPaddleLock);
+
     this.scene.matter.add.gameObject(this.launchPaddleLock, {
       isStatic: true,
       label: 'launchPaddleLock',
     });
-    this.launchPaddleLock.setAngle(-45);
+    this.launchPaddleLock.setPosition(
+      this.launchPaddleLock.x + 100,
+      this.launchPaddleLock.y
+    );
+  }
 
-    this.scene.matter.world.on('collisionstart', function (event) {
-      let pairs = event.pairs;
+  resetValves() {
+    this.launchPaddleLock.x += 100;
+  }
+
+  collisionTest() {
+    const launchPaddleLock = this.launchPaddleLock;
+    const gameWidth = this.x;
+    console.log(launchPaddleLock.x, gameWidth);
+    this.scene.matter.world.on('collisionend', function (event) {
       event.pairs.forEach((pair) => {
         const { bodyA, bodyB } = pair;
+
         if (bodyA.label == 'launchPaddleLockSensor') {
-          // this.launchPaddleLock.setPosition(this.x + 10, this.y * 0.535, null);
+          if (launchPaddleLock.x >= gameWidth) {
+            setTimeout(() => {
+              launchPaddleLock.setPosition(
+                launchPaddleLock.x - 100,
+                launchPaddleLock.y
+              );
+            }, 100);
+          }
         }
       });
     });
@@ -108,13 +127,14 @@ export default class Launcher {
       function () {
         this.pushLevel = 0;
         this.startTimer = setInterval(() => {
-          this.pushLevel = this.pushLevel + 1;
-          console.log(this.pushLevel);
-          this.startLaunchPaddle.setPosition(
-            this.startLaunchPaddle.x,
-            this.startLaunchPaddle.y + 2,
-            null
-          );
+          if (this.startLaunchPaddle.y <= 1240) {
+            this.pushLevel = this.pushLevel + 1;
+            this.startLaunchPaddle.setPosition(
+              this.startLaunchPaddle.x,
+              this.startLaunchPaddle.y + 2,
+              null
+            );
+          }
         }, 50);
       },
       this

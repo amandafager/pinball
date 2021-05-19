@@ -45,6 +45,9 @@ export default class Ball extends Phaser.Physics.Matter.Image {
         console.log('hit top');
         //this.updateVelocity(10, 10);
       }
+      if (bodyA.label === 'launchPaddleLockSensor') {
+        console.log('test');
+      }
     });
   }
 
