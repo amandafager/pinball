@@ -138,8 +138,8 @@ export default class GameScene extends Phaser.Scene {
       'spring'
     );
 
-    let score = this.add.text(70, 0, 'Score: ' + this.score, { fontSize: 18 }).setOrigin(0.5).setDepth(1);
-    this.activeBall = this.add.text(700, 0, 'Balls left: ' + this.gameBalls, { fontSize: 18 }).setOrigin(0.5).setDepth(1);
+    let score = this.add.text(this.gameWidth * 0.0875, 0 , 'Score: ' + this.score, { fontSize: 18 }).setOrigin(0).setDepth(1);
+    this.activeBall = this.add.text(this.gameWidth  * 0.875 , 0, 'Balls left: ' + this.gameBalls, { fontSize: 18}).setOrigin(0).setDepth(1);
     
     this.newGame();
     console.log(this.currentBall);
@@ -166,14 +166,23 @@ export default class GameScene extends Phaser.Scene {
   }
 
   resetBall() {
-      if (this.gameBalls >= 1 && this.ball.y > this.gameHeight - 20) {
+      if (this.gameBalls >= 1 && this.ball.y > this.gameHeight - 20 ) {
+          this.gameBalls--;
+          this.getNewBall();
+          this.activeBall.text = 'Balls left: ' + this.gameBalls;
+          console.log("game balls " + this.gameBalls);
+          console.log("current ball " + this.currentBall);
+      }
+
+      if(this.ball.getData('dead')) {
+        this.ball.destroy(); 
         this.gameBalls--;
         this.getNewBall();
         this.activeBall.text = 'Balls left: ' + this.gameBalls;
         console.log("game balls " + this.gameBalls);
         console.log("current ball " + this.currentBall);
       }
-  }
+  } 
 
   endGame(){
     this.ball.destroy(); 
