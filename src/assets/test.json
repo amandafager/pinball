@@ -1,0 +1,97 @@
+{
+	"generator_info": "Shape definitions generated with PhysicsEditor. Visit https://www.codeandweb.com/physicseditor",
+	"leftRamp": {
+		"type": "fromPhysicsEditor",
+		"label": "leftRamp",
+		"isStatic": false,
+		"density": 0.10000000149011612,
+		"restitution": 0,
+		"friction": 0.10000000149011612,
+		"frictionAir": 0.009999999776482582,
+		"frictionStatic": 0.5,
+		"collisionFilter": {
+			"group": 0,
+			"category": 1,
+			"mask": 255
+		},
+		"fixtures": [
+			{
+				"label": "",
+				"isSensor": false,
+				"circle": {
+					"x": 20.26143790849673,
+					"y": 20.32679738562092,
+					"radius": 20
+				}
+			},
+			{
+				"label": "",
+				"isSensor": false,
+				"vertices": [
+					[ { "x":40, "y":17 }, { "x":0, "y":17 }, { "x":0, "y":289 }, { "x":40, "y":222 } ]
+				]
+			},
+			{
+				"label": "",
+				"isSensor": false,
+				"vertices": [
+					[ { "x":40, "y":222 }, { "x":-1, "y":292 }, { "x":35, "y":339 }, { "x":72, "y":284 } ]
+				]
+			},
+			{
+				"label": "",
+				"isSensor": false,
+				"vertices": [
+					[ { "x":204, "y":362 }, { "x":72, "y":285 }, { "x":35, "y":339 }, { "x":168, "y":421 } ]
+				]
+			}
+		]
+	},
+	"rightRamp": {
+		"type": "fromPhysicsEditor",
+		"label": "rightRamp",
+		"isStatic": false,
+		"density": 0.10000000149011612,
+		"restitution": 0,
+		"friction": 0.10000000149011612,
+		"frictionAir": 0.009999999776482582,
+		"frictionStatic": 0.5,
+		"collisionFilter": {
+			"group": 0,
+			"category": 1,
+			"mask": 255
+		},
+		"fixtures": [
+			{
+				"label": "",
+				"isSensor": false,
+				"vertices": [
+					[ { "x":203, "y":291 }, { "x":203, "y":19 }, { "x":163, "y":19 }, { "x":163, "y":224 } ]
+				]
+			},
+			{
+				"label": "",
+				"isSensor": false,
+				"vertices": [
+					[ { "x":163, "y":222 }, { "x":131, "y":284 }, { "x":168, "y":339 }, { "x":204, "y":292 } ]
+				]
+			},
+			{
+				"label": "",
+				"isSensor": false,
+				"circle": {
+					"x": 183.33333333333331,
+					"y": 21.307189542483627,
+					"radius": 20
+				}
+			},
+			{
+				"label": "",
+				"isSensor": false,
+				"vertices": [
+					[ { "x":-1, "y":361 }, { "x":35, "y":420 }, { "x":168, "y":338 }, { "x":131, "y":284 } ]
+				]
+			}
+		]
+	}
+}

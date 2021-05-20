@@ -12,9 +12,9 @@ import leftRamp from '../images/leftRamp.png';
 import rightRamp from '../images/rightRamp.png';
 import Ball from '../assets/ball';
 import ballImage from '../images/ball.png';
-import shapes from '../assets/physics3.json';
+import shapes from '../assets/physics.json';
 import sheetJson from '../assets/pinball-sprites.json';
-import sheetPng from '../images/pinball-sprites.png';
+import sheetPng from '../images/pinball-sprites2.png';
 import Object from '../assets/object';
 
 import Flipper from '../assets/flippers';
@@ -61,6 +61,7 @@ export default class GameScene extends Phaser.Scene {
     this.load.image('twoTimes', twoTimes);
     this.load.atlas('sheet', sheetPng, sheetJson);
     this.load.json('shapes', shapes);
+  
     
    
     
@@ -76,19 +77,27 @@ export default class GameScene extends Phaser.Scene {
 
   create() {
     const shapes = this.cache.json.get('shapes');
+
+
     this.matter.world.setBounds(0, 0, this.gameWidth, this.gameHeight);
     this.back = this.add.image(0, 0, 'background').setOrigin(0, 0);
     this.back.scale = 1.15;
     this.backStrips = this.add.image(0, 0, 'backgroundStripes').setOrigin(0, 0);
 
-    this.blackDividerRight = this.add.image(this.gameWidth - 50, this.gameHeight, 'blackDivider').setOrigin(1);
-    this.blackDividerLeft = this.add.image(90, this.gameHeight, 'blackDivider').setOrigin(1);
-    this.twoTimes = this.add.image(3, this.gameHeight - 150, 'twoTimes').setOrigin(0);
-    this.blackHole = this.add.image(3, this.gameHeight - 50, 'blackHole').setOrigin(0);
-   
+    //this.blackDividerRight = this.add.image(this.gameWidth - 50, this.gameHeight, 'blackDivider').setOrigin(1);
+   // this.blackDividerLeft = this.add.image(90, this.gameHeight, 'blackDivider').setOrigin(1)
+    //this.twoTimes = this.add.image(3, this.gameHeight - 150, 'twoTimes').setOrigin(0);
+    //this.blackHole = this.add.image(3, this.gameHeight - 50, 'blackHole').setOrigin(0);
+     
+    this.blackDividerRight = new Object(this, this.gameWidth - 70, this.gameHeight - 90, "sheet", "black_divider.png", shapes.black_divider);
+    this.blackDividerRight = new Object(this, 70, this.gameHeight - 90, "sheet", "black_divider.png", shapes.black_divider);
+    this.blackHole = new Object(this, 25, this.gameHeight - 40, "sheet", "blackHole.png", shapes.blackHole);
+    this.twoTimes  = new Object(this, 25, this.gameHeight - 140, "sheet", "2x.png", shapes.blackHole);
 
-   
 
+
+
+    
     //this.topHalfMoon = this.add.image(0, 0, 'topHalfMoon').setOrigin(0, 0);
     //new createObjects(this, 180, 890, 'leftBumper', this.collisionGroupB);
     //new createObjects(this, 540, 890, 'rightBumper', this.collisionGroupB);
@@ -142,8 +151,8 @@ export default class GameScene extends Phaser.Scene {
     const topBumperThree = new Object(this, this.gameWidth * 0.7, 250, "sheet", "topBumper.png", shapes.topBumper);
     const leftBumper = new Object(this, this.gameWidth * 0.25, this.gameHeight * 0.7, "sheet", "leftBumper.png", shapes.leftBumper);
     const rightBumper = new Object(this, this.gameWidth - this.gameWidth * 0.25, this.gameHeight * 0.7, "sheet", "rightBumper.png", shapes.rightBumper);
-    const leftRamp = new Object(this, this.gameWidth * 0.14, this.gameHeight * 0.75, "sheet", "leftRamp.png", shapes.leftRamp);
-    const rightRamp = new Object(this, this.gameWidth - this.gameWidth * 0.14, this.gameHeight * 0.75, "sheet", "rightRamp.png", shapes.rightRamp);
+    const leftRamp = new Object(this, this.gameWidth * 0.14, this.gameHeight * 0.744, "sheet", "leftRamp.png", shapes.leftRamp);
+    const rightRamp = new Object(this, this.gameWidth - this.gameWidth * 0.14, this.gameHeight * 0.744, "sheet", "rightRamp.png", shapes.rightRamp);
     const leftFlipper = new Flipper(this, this.gameWidth * 0.31, this.gameHeight * 0.87, 'left', LeftTrigger);
     const rightFlipper = new Flipper(this, this.gameWidth * 0.68, this.gameHeight * 0.87, 'right', RightTrigger);
 
@@ -157,8 +166,8 @@ export default class GameScene extends Phaser.Scene {
       'closingPinRight'
     );
 
-    let score = this.add.text(this.gameWidth * 0.0875, 0 , 'Score: ' + this.score, { fontSize: 18 }).setOrigin(0).setDepth(1);
-    this.activeBall = this.add.text(this.gameWidth  * 0.875 , 0, 'Balls left: ' + this.gameBalls, { fontSize: 18}).setOrigin(0).setDepth(1);
+    let score = this.add.text(this.gameWidth * 0.05, 0 , 'Score: ' + this.score, { fontSize: 18 }).setOrigin(0).setDepth(1);
+    this.activeBall = this.add.text(this.gameWidth  * 0.78 , 0, 'Balls left: ' + this.gameBalls, { fontSize: 18}).setOrigin(0).setDepth(1);
   
     this.newGame();
     console.log(this.currentBall);
