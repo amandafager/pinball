@@ -16,13 +16,13 @@ export default class Ball extends Phaser.Physics.Matter.Image {
       radius: 18,
     });
     this.setAngularVelocity(0.01);
-    this.setBounce(0 /* 0.6 */);
-    this.setFrictionAir(0.0001 /* 1 */);
+    this.setBounce(0.3);
+    this.setFrictionAir(0.0001);
     this.setDensity(0.001);
-    this.setFriction(0 /* 0, 0, 0 */);
+    this.setFriction(0);
     this.setData('onStart', true);
     this.preUpdate();
-    this.ballCollsion();
+    this.ballCollision();
     this.launcher = launcher;
     this.launcher.attachBallOnLaunch(this);
   }
@@ -35,25 +35,17 @@ export default class Ball extends Phaser.Physics.Matter.Image {
     }
   }
 
-  ballCollsion() {
+  ballCollision() {
     this.scene.matter.world.on('collisionstart', (event, bodyA, bodyB) => {
       if (bodyA.label === 'launcher') {
         if (!this.getData('onStart'))
           this.setData('onStart', true) && this.setData('dead', true);
-      }
-      if (bodyA.label === 'top') {
-        console.log('hit top');
-        //this.updateVelocity(10, 10);
-      }
-      if (bodyA.label === 'launchPaddleLockSensor') {
-        console.log('test');
       }
     });
   }
 
   preUpdate() {
     if (this.y > this.gameHeight - 20) {
-      console.log('Reset');
       this.destroy();
     }
   }

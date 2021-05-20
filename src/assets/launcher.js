@@ -60,10 +60,6 @@ export default class Launcher {
     this.scene.matter.add.gameObject(this.launchPaddleLock, {
       isStatic: true,
       label: 'launchPaddleLock',
-      setBody: {
-        type: 'circle',
-        radius: 18,
-      },
     });
     this.launchPaddleLock.setPosition(
       this.launchPaddleLock.x + 100,
