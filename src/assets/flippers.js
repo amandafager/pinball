@@ -1,6 +1,6 @@
 
 export default class Flipper extends Phaser.Scene  {
-  constructor(scene, x, y, orientation, shapes, CG) {
+  constructor(scene, x, y, orientation, shapes) {
     super(scene);
     this.scene = scene;
     this.x = x;
@@ -17,7 +17,6 @@ export default class Flipper extends Phaser.Scene  {
     this.startPosition = 108;
     this.endPosition = 141;
     this.isFlipping = false;
-    this.cg = CG;
 
     if(this.orientation === 'right'){
         this.blockOffsetX = -this.flipperOffsetY * 2;
@@ -54,13 +53,11 @@ export default class Flipper extends Phaser.Scene  {
             shape: this.shapes,
           });
         this.flipper.setExistingBody(this.flipperBody);
-        this.flipper.setCollisionGroup(this.cg);
 
     } else if (this.orientation === 'right') {
         this.flipper = this.scene.matter.add.sprite(this.x, this.y, "sheet", "RightTrigger.png", {
             shape: this.shapes,
           }).setExistingBody(this.flipperBody);
-          this.flipper.setCollisionGroup(this.cg);
     } else {
        
     }

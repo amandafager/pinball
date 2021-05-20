@@ -1,293 +1,335 @@
 {
-  "textures": [
-    {
-      "image": "pinball-sprites.png",
-      "format": "RGBA8888",
-      "size": {
-        "w": 1214,
-        "h": 433
-      },
-      "scale": 1,
-      "frames": [
-        {
-          "filename": "leftRamp.png",
-          "rotated": false,
-          "trimmed": false,
-          "sourceSize": {
-            "w": 204,
-            "h": 420
-          },
-          "spriteSourceSize": {
-            "x": 0,
-            "y": 0,
-            "w": 204,
-            "h": 420
-          },
-          "frame": {
-            "x": 1,
-            "y": 1,
-            "w": 204,
-            "h": 420
-          }
-        },
-        {
-          "filename": "rightRamp.png",
-          "rotated": false,
-          "trimmed": false,
-          "sourceSize": {
-            "w": 204,
-            "h": 420
-          },
-          "spriteSourceSize": {
-            "x": 0,
-            "y": 0,
-            "w": 204,
-            "h": 420
-          },
-          "frame": {
-            "x": 207,
-            "y": 1,
-            "w": 204,
-            "h": 420
-          }
-        },
-        {
-          "filename": "topHalfMoon.png",
-          "rotated": false,
-          "trimmed": false,
-          "sourceSize": {
-            "w": 800,
-            "h": 229
-          },
-          "spriteSourceSize": {
-            "x": 0,
-            "y": 0,
-            "w": 800,
-            "h": 229
-          },
-          "frame": {
-            "x": 413,
-            "y": 1,
-            "w": 800,
-            "h": 229
-          }
-        },
-        {
-          "filename": "leftBumper.png",
-          "rotated": false,
-          "trimmed": false,
-          "sourceSize": {
-            "w": 114,
-            "h": 200
-          },
-          "spriteSourceSize": {
-            "x": 0,
-            "y": 0,
-            "w": 114,
-            "h": 200
-          },
-          "frame": {
-            "x": 413,
-            "y": 232,
-            "w": 114,
-            "h": 200
-          }
-        },
-        {
-          "filename": "rightBumper.png",
-          "rotated": false,
-          "trimmed": false,
-          "sourceSize": {
-            "w": 114,
-            "h": 200
-          },
-          "spriteSourceSize": {
-            "x": 0,
-            "y": 0,
-            "w": 114,
-            "h": 200
-          },
-          "frame": {
-            "x": 529,
-            "y": 232,
-            "w": 114,
-            "h": 200
-          }
-        },
-        {
-          "filename": "black_divider.png",
-          "rotated": false,
-          "trimmed": false,
-          "sourceSize": {
-            "w": 41,
-            "h": 153
-          },
-          "spriteSourceSize": {
-            "x": 0,
-            "y": 0,
-            "w": 41,
-            "h": 153
-          },
-          "frame": {
-            "x": 645,
-            "y": 232,
-            "w": 41,
-            "h": 153
-          }
-        },
-        {
-          "filename": "2x.png",
-          "rotated": false,
-          "trimmed": false,
-          "sourceSize": {
-            "w": 45,
-            "h": 45
-          },
-          "spriteSourceSize": {
-            "x": 0,
-            "y": 0,
-            "w": 45,
-            "h": 45
-          },
-          "frame": {
-            "x": 645,
-            "y": 387,
-            "w": 45,
-            "h": 45
-          }
-        },
-        {
-          "filename": "topBumper.png",
-          "rotated": false,
-          "trimmed": false,
-          "sourceSize": {
-            "w": 114,
-            "h": 114
-          },
-          "spriteSourceSize": {
-            "x": 0,
-            "y": 0,
-            "w": 114,
-            "h": 114
-          },
-          "frame": {
-            "x": 688,
-            "y": 232,
-            "w": 114,
-            "h": 114
-          }
-        },
-        {
-          "filename": "closingPinRight.png",
-          "rotated": false,
-          "trimmed": true,
-          "sourceSize": {
-            "w": 68,
-            "h": 64
-          },
-          "spriteSourceSize": {
-            "x": 0,
-            "y": 1,
-            "w": 68,
-            "h": 63
-          },
-          "frame": {
-            "x": 692,
-            "y": 348,
-            "w": 68,
-            "h": 63
-          }
-        },
-        {
-          "filename": "closingPinLeft.png",
-          "rotated": false,
-          "trimmed": true,
-          "sourceSize": {
-            "w": 67,
-            "h": 60
-          },
-          "spriteSourceSize": {
-            "x": 0,
-            "y": 5,
-            "w": 67,
-            "h": 55
-          },
-          "frame": {
-            "x": 762,
-            "y": 348,
-            "w": 67,
-            "h": 55
-          }
-        },
-        {
-          "filename": "LeftTrigger.png",
-          "rotated": false,
-          "trimmed": false,
-          "sourceSize": {
-            "w": 164,
-            "h": 51
-          },
-          "spriteSourceSize": {
-            "x": 0,
-            "y": 0,
-            "w": 164,
-            "h": 51
-          },
-          "frame": {
-            "x": 804,
-            "y": 232,
-            "w": 164,
-            "h": 51
-          }
-        },
-        {
-          "filename": "RightTrigger.png",
-          "rotated": false,
-          "trimmed": false,
-          "sourceSize": {
-            "w": 164,
-            "h": 51
-          },
-          "spriteSourceSize": {
-            "x": 0,
-            "y": 0,
-            "w": 164,
-            "h": 51
-          },
-          "frame": {
-            "x": 804,
-            "y": 285,
-            "w": 164,
-            "h": 51
-          }
-        },
-        {
-          "filename": "blackHole.png",
-          "rotated": false,
-          "trimmed": false,
-          "sourceSize": {
-            "w": 43,
-            "h": 44
-          },
-          "spriteSourceSize": {
-            "x": 0,
-            "y": 0,
-            "w": 43,
-            "h": 44
-          },
-          "frame": {
-            "x": 831,
-            "y": 338,
-            "w": 43,
-            "h": 44
-          }
-        }
-      ]
-    }
-  ],
-  "meta": {
-    "app": "https://www.codeandweb.com/texturepacker",
-    "version": "3.0",
-    "smartupdate": "$TexturePacker:SmartUpdate:ca4fbd7b846e8b61bd28721276f2e460:ba31d97d8870d887e993050c2e1bfa1c:5602cdfa346dd8df588afc0b82b00426$"
-  }
+	"textures": [
+		{
+			"image": "pinball-sprites.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 1214,
+				"h": 433
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "leftRamp.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 204,
+						"h": 420
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 204,
+						"h": 420
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 204,
+						"h": 420
+					}
+				},
+				{
+					"filename": "rightRamp.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 204,
+						"h": 420
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 204,
+						"h": 420
+					},
+					"frame": {
+						"x": 207,
+						"y": 1,
+						"w": 204,
+						"h": 420
+					}
+				},
+				{
+					"filename": "topHalfMoon.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 800,
+						"h": 229
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 800,
+						"h": 229
+					},
+					"frame": {
+						"x": 413,
+						"y": 1,
+						"w": 800,
+						"h": 229
+					}
+				},
+				{
+					"filename": "leftBumper.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 114,
+						"h": 200
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 114,
+						"h": 200
+					},
+					"frame": {
+						"x": 413,
+						"y": 232,
+						"w": 114,
+						"h": 200
+					}
+				},
+				{
+					"filename": "rightBumper.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 114,
+						"h": 200
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 114,
+						"h": 200
+					},
+					"frame": {
+						"x": 529,
+						"y": 232,
+						"w": 114,
+						"h": 200
+					}
+				},
+				{
+					"filename": "black_divider.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 41,
+						"h": 153
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 41,
+						"h": 153
+					},
+					"frame": {
+						"x": 645,
+						"y": 232,
+						"w": 41,
+						"h": 153
+					}
+				},
+				{
+					"filename": "2x.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 45,
+						"h": 45
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 45,
+						"h": 45
+					},
+					"frame": {
+						"x": 645,
+						"y": 387,
+						"w": 45,
+						"h": 45
+					}
+				},
+				{
+					"filename": "leftSmallBumper.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 94,
+						"h": 131
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 94,
+						"h": 131
+					},
+					"frame": {
+						"x": 688,
+						"y": 232,
+						"w": 94,
+						"h": 131
+					}
+				},
+				{
+					"filename": "closingPinRight.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 68,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 1,
+						"w": 68,
+						"h": 63
+					},
+					"frame": {
+						"x": 692,
+						"y": 365,
+						"w": 68,
+						"h": 63
+					}
+				},
+				{
+					"filename": "closingPinLeft.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 67,
+						"h": 60
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 5,
+						"w": 67,
+						"h": 55
+					},
+					"frame": {
+						"x": 762,
+						"y": 365,
+						"w": 67,
+						"h": 55
+					}
+				},
+				{
+					"filename": "rightSmallBumper.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 94,
+						"h": 131
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 94,
+						"h": 131
+					},
+					"frame": {
+						"x": 784,
+						"y": 232,
+						"w": 94,
+						"h": 131
+					}
+				},
+				{
+					"filename": "LeftTrigger.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 164,
+						"h": 51
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 164,
+						"h": 51
+					},
+					"frame": {
+						"x": 831,
+						"y": 365,
+						"w": 164,
+						"h": 51
+					}
+				},
+				{
+					"filename": "topBumper.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 114,
+						"h": 114
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 114,
+						"h": 114
+					},
+					"frame": {
+						"x": 880,
+						"y": 232,
+						"w": 114,
+						"h": 114
+					}
+				},
+				{
+					"filename": "RightTrigger.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 164,
+						"h": 51
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 164,
+						"h": 51
+					},
+					"frame": {
+						"x": 997,
+						"y": 232,
+						"w": 164,
+						"h": 51
+					}
+				},
+				{
+					"filename": "blackHole.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 43,
+						"h": 44
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 43,
+						"h": 44
+					},
+					"frame": {
+						"x": 1163,
+						"y": 232,
+						"w": 43,
+						"h": 44
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:379d7ab2d63224d7290de84d7ad1186b:512dcc1702d13b67e26a153c770f179f:bee1b0df2f46961d5470e5d19364720e$"
+	}
 }
