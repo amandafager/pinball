@@ -41,7 +41,12 @@ export default class Ball extends Phaser.Physics.Matter.Image {
     const ball = this;
     this.scene.matter.world.on('collisionstart', (event, bodyA, bodyB) => {
       if (bodyA.label === 'launcher') {
-        if (!this.getData('onStart')) this.setData('onStart', true);
+        if (!this.getData('onStart'))
+          this.setData('onStart', true) && this.setData('dead', true);
+      }
+      if (bodyA.label === 'top') {
+        console.log('hit top');
+        //this.updateVelocity(10, 10);
       }
       if (bodyA.label === 'launchPaddleLockSensor') {
         console.log('launchPaddleLockSensor');

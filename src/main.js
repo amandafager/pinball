@@ -18,12 +18,9 @@ const config = {
       debug: true,
       gravity: {
         x: 0,
-        y: 0.9,
+        y: 1.5,
       },
     },
-  },
-  game: {
-    balls: 3,
   },
 };
 
