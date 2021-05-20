@@ -17,6 +17,8 @@ export default class Object extends Phaser.Scene {
     });
 
     obj.setPosition(this.x + obj.centerOfMass.x, this.y + obj.centerOfMass.y);
+
+    //obj.setFlipX(90);
     //obj.setVelocity(10, -10);
   }
 }

@@ -60,6 +60,10 @@ export default class Launcher {
     this.scene.matter.add.gameObject(this.launchPaddleLock, {
       isStatic: true,
       label: 'launchPaddleLock',
+      setBody: {
+        type: 'circle',
+        radius: 18,
+      },
     });
     this.launchPaddleLock.setPosition(
       this.launchPaddleLock.x + 100,
@@ -105,13 +109,15 @@ export default class Launcher {
     let vx;
     let vy;
 
-    if (pushLevel <= 3) (vx = 0), (vy = -10);
+    if (pushLevel <= 3) (vx = 0), (vy = -5);
 
-    if (pushLevel >= 4 && pushLevel <= 6) (vx = 0), (vy = -20);
+    if (pushLevel >= 4 && pushLevel <= 6) (vx = 0), (vy = -10);
 
-    if (pushLevel >= 7 && pushLevel <= 10) (vx = 0), (vy = -30);
+    if (pushLevel >= 7 && pushLevel <= 10) (vx = 0), (vy = -20);
 
-    if (pushLevel >= 11) (vx = 0), (vy = -40);
+    if (pushLevel >= 11 && pushLevel <= 15) (vx = 0), (vy = -30);
+
+    if (pushLevel >= 16) (vx = 10), (vy = -40);
 
     return { vx, vy };
   }
@@ -154,39 +160,5 @@ export default class Launcher {
       },
       this
     );
-  }
-
-  preUpdate(ball) {
-    this.ball = ball;
-    let a = this.ball.getData('onStart');
-
-    if (a) {
-      console.log(a);
-
-      setInterval(() => {
-        const size = 120;
-
-        var isUp = this.spacePushed.isUp;
-        if (isUp) {
-          this.debug.clear();
-          this.fill = 0;
-        }
-
-        var isDown = this.spacePushed.isDown;
-        if (isDown) {
-          if (this.fill < size) this.fill = this.fill + 3;
-        }
-
-        this.debug.fillStyle(0x2d2d2d);
-        this.debug.fillRect(64, 64, 30, size);
-
-        this.debug.fillStyle(0x2dff2d);
-        this.debug.fillRect(64, 64, 30, this.fill);
-
-        this.debug.setPosition(800 - 20, 1200 + 40);
-        this.debug.setAngle(180);
-        this.onStart = false;
-      }, 10);
-    }
   }
 }
