@@ -5,8 +5,8 @@ export default class Ball extends Phaser.Physics.Matter.Image {
   gameWidth = config.scale.width;
   gameHeight = config.scale.height;
 
-  constructor(scene, x, y, texture, launcher, CG) {
-    super(scene.matter.world, x, y, texture, CG);
+  constructor(scene, x, y, texture, launcher) {
+    super(scene.matter.world, x, y, texture);
 
     scene.add.existing(this);
     this.setTexture(texture);
@@ -15,8 +15,6 @@ export default class Ball extends Phaser.Physics.Matter.Image {
       type: 'circle',
       radius: 18,
     });
-    // this.setCollisionGroup(CG);
-    // this.setCollisionGroup(4);
 
     this.setAngularVelocity(0.01);
     this.setBounce(0.3);

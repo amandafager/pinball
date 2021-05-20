@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
 
 export default class Launcher {
-  constructor(scene, x, y, width, ball, spring, closingPinRight, CG) {
+  constructor(scene, x, y, width, ball, spring, closingPinRight) {
     scene.add.existing(this);
     this.scene = scene;
     this.width = width;
@@ -10,7 +10,6 @@ export default class Launcher {
     this.y = y;
     this.ball = ball;
     this.spring = spring;
-    this.cg = CG;
     this.closingPinRight = closingPinRight;
     this.colliding = false;
 
@@ -35,8 +34,6 @@ export default class Launcher {
       friction: 0,
       label: 'launcher',
     });
-
-    // startLaunchPaddle.setCollisionGroup(this.cg);
 
     let launchPaddleLockSensor = this.scene.add.rectangle(
       this.x + 10,

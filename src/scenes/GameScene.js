@@ -111,7 +111,6 @@ export default class GameScene extends Phaser.Scene {
       this.ball,
       'spring',
       'closingPinRight',
-      this.collisionGroupB
     );
 
     this.scoreText = this.add.text(this.gameWidth * 0.05, 0 , 'Score: ' + this.score, { fontSize: 18 }).setOrigin(0).setDepth(1);
@@ -137,12 +136,9 @@ export default class GameScene extends Phaser.Scene {
       this.gameHeight - 200,
       'ball',
       this.launcher, 
-      this.collisionGroupA
     );
     this.currentBall++; 
-    
-    // this.ball.setCollidesWith([this.collisionGroupA, this.collisionGroupB]);
-  }
+      }
 
   resetBall() {
       if (this.gameBalls >= 1 && this.ball.y > this.gameHeight - 20 ) {
