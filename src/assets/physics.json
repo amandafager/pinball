@@ -449,5 +449,99 @@
         ]
       }
     ]
+  },
+  "rightSmallBumper": {
+    "type": "fromPhysicsEditor",
+    "label": "rightSmallBumper",
+    "isStatic": true,
+    "density": 0.10000000149011612,
+    "restitution": 0,
+    "friction": 0.10000000149011612,
+    "frictionAir": 0.009999999776482582,
+    "frictionStatic": 0.5,
+    "collisionFilter": {
+      "group": 0,
+      "category": 1,
+      "mask": 255
+    },
+    "fixtures": [
+      {
+        "label": "",
+        "isSensor": false,
+        "vertices": [
+          [
+            { "x": 32, "y": 124 },
+            { "x": 92, "y": 27 },
+            { "x": 62, "y": 10 },
+            { "x": 4, "y": 103 }
+          ]
+        ]
+      },
+      {
+        "label": "",
+        "isSensor": false,
+        "circle": {
+          "x": 76.38483965014576,
+          "y": 19.046647230320744,
+          "radius": 17.097783673766155
+        }
+      },
+      {
+        "label": "",
+        "isSensor": false,
+        "circle": {
+          "x": 18.65889212827988,
+          "y": 112.6326530612245,
+          "radius": 17.097783673766155
+        }
+      }
+    ]
+  },
+  "leftSmallBumper": {
+    "type": "fromPhysicsEditor",
+    "label": "leftSmallBumper",
+    "isStatic": true,
+    "density": 0.10000000149011612,
+    "restitution": 0,
+    "friction": 0.10000000149011612,
+    "frictionAir": 0.009999999776482582,
+    "frictionStatic": 0.5,
+    "collisionFilter": {
+      "group": 0,
+      "category": 1,
+      "mask": 255
+    },
+    "fixtures": [
+      {
+        "label": "",
+        "isSensor": false,
+        "vertices": [
+          [
+            { "x": 62, "y": 124 },
+            { "x": 91, "y": 105 },
+            { "x": 31, "y": 8 },
+            { "x": 2, "y": 26 }
+          ]
+        ]
+      },
+      {
+        "label": "",
+        "isSensor": false,
+        "circle": {
+          "x": 17.78425655976676,
+          "y": 18.755102040816368,
+          "radius": 17.097783673766155
+        }
+      },
+      {
+        "label": "",
+        "isSensor": false,
+        "circle": {
+          "x": 75.21865889212827,
+          "y": 112.34110787172014,
+          "radius": 17.097783673766155
+        }
+      }
+    ]
   }
 }

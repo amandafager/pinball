@@ -90,8 +90,10 @@ export default class GameScene extends Phaser.Scene {
       this
     );
 
-    this.blackDividerRight = new Object(this, this.gameWidth - 70, this.gameHeight - 70, "sheet", "black_divider.png", shapes.black_divider);
-    this.blackDividerLeft = new Object(this, 70, this.gameHeight - 70, "sheet", "black_divider.png", shapes.black_divider);
+    const rightSmallBumper = new Object(this, this.gameWidth - this.gameWidth * 0.25, this.gameHeight * 0.45, "sheet", "rightSmallBumper.png", shapes.rightSmallBumper);
+    const leftSmallBumper = new Object(this, this.gameWidth * 0.25, this.gameHeight * 0.45, "sheet", "leftSmallBumper.png", shapes.leftSmallBumper);
+    const blackDividerRight = new Object(this, this.gameWidth - 70, this.gameHeight - 70, "sheet", "black_divider.png", shapes.black_divider);
+    const blackDividerLeft = new Object(this, 70, this.gameHeight - 70, "sheet", "black_divider.png", shapes.black_divider);
     const topHalfMoon = new Object(this, 400, 68, "sheet", "topHalfMoon.png", shapes.topHalfMoon);
     const topBumperOne = new Object(this, this.gameWidth * 0.3, 250, "sheet", "topBumper.png", shapes.topBumper);
     const topBumperTwo = new Object(this, this.gameWidth * 0.5, 360, "sheet", "topBumper.png", shapes.topBumper);
