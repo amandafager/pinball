@@ -12,7 +12,7 @@ import leftRamp from '../images/leftRamp.png';
 import rightRamp from '../images/rightRamp.png';
 import Ball from '../assets/ball';
 import ballImage from '../images/ball.png';
-import shapes from '../assets/physics3.json';
+import shapes from '../assets/physics.json';
 import sheetJson from '../assets/pinball-sprites.json';
 import sheetPng from '../images/pinball-sprites.png';
 import Object from '../assets/object';
@@ -61,17 +61,7 @@ export default class GameScene extends Phaser.Scene {
     this.load.image('twoTimes', twoTimes);
     this.load.atlas('sheet', sheetPng, sheetJson);
     this.load.json('shapes', shapes);
-    
-   
-    
-
-    //this.load.image('topHalfMoon', topHalfMoon);
-    //this.load.image('topBumper', topBumper);
-    //this.load.image('leftBumper', leftBumper);
-    //this.load.image('rightBumper', rightBumper);
-    this.load.image('leftRamp', leftRamp);
-    //this.load.image('rightRamp', rightRamp);
-    
+    this.load.image('leftRamp', leftRamp);    
   }
 
   create() {
@@ -85,20 +75,7 @@ export default class GameScene extends Phaser.Scene {
     this.blackDividerLeft = this.add.image(90, this.gameHeight, 'blackDivider').setOrigin(1);
     this.twoTimes = this.add.image(3, this.gameHeight - 150, 'twoTimes').setOrigin(0);
     this.blackHole = this.add.image(3, this.gameHeight - 50, 'blackHole').setOrigin(0);
-   
-
-   
-
-    //this.topHalfMoon = this.add.image(0, 0, 'topHalfMoon').setOrigin(0, 0);
-    //new createObjects(this, 180, 890, 'leftBumper', this.collisionGroupB);
-    //new createObjects(this, 540, 890, 'rightBumper', this.collisionGroupB);
-    //new createObjects(this, this.gameWidth * 0.5 -100, 100, 'topHalfMoon', this.collisionGroupB);
-    //new createObjects(this, this.gameWidth * 0.3, 250, 'topBumper', this.collisionGroupB);
-    //new createObjects(this, this.gameWidth * 0.5, 360, 'topBumper', this.collisionGroupB);
-    //new createObjects(this, this.gameWidth * 0.7, 250, 'topBumper', this.collisionGroupB);
-
     
-
     const aPushed = this.input.keyboard.addKey('A');
     const dPushed = this.input.keyboard.addKey('D');
 
@@ -135,17 +112,21 @@ export default class GameScene extends Phaser.Scene {
     );
 
 
+    this.collisionGroupA = this.matter.world.nextCategory(); // Ball
+  	this.collisionGroupB = this.matter.world.nextCategory(); // Walls
 
-    const topHalfMoon = new Object(this, 400, 68, "sheet", "topHalfMoon.png", shapes.topHalfMoon);
-    const topBumperOne = new Object(this, this.gameWidth * 0.3, 250, "sheet", "topBumper.png", shapes.topBumper);
-    const topBumperTwo = new Object(this, this.gameWidth * 0.5, 360, "sheet", "topBumper.png", shapes.topBumper);
-    const topBumperThree = new Object(this, this.gameWidth * 0.7, 250, "sheet", "topBumper.png", shapes.topBumper);
-    const leftBumper = new Object(this, this.gameWidth * 0.25, this.gameHeight * 0.7, "sheet", "leftBumper.png", shapes.leftBumper);
-    const rightBumper = new Object(this, this.gameWidth - this.gameWidth * 0.25, this.gameHeight * 0.7, "sheet", "rightBumper.png", shapes.rightBumper);
-    const leftRamp = new Object(this, this.gameWidth * 0.14, this.gameHeight * 0.75, "sheet", "leftRamp.png", shapes.leftRamp);
-    const rightRamp = new Object(this, this.gameWidth - this.gameWidth * 0.14, this.gameHeight * 0.75, "sheet", "rightRamp.png", shapes.rightRamp);
-    const leftFlipper = new Flipper(this, this.gameWidth * 0.31, this.gameHeight * 0.87, 'left', LeftTrigger);
-    const rightFlipper = new Flipper(this, this.gameWidth * 0.68, this.gameHeight * 0.87, 'right', RightTrigger);
+    const topHalfMoon = new Object(this, 400, 68, "sheet", "topHalfMoon.png", shapes.topHalfMoon, this.collisionGroupB);
+    const topBumperOne = new Object(this, this.gameWidth * 0.3, 250, "sheet", "topBumper.png", shapes.topBumper, this.collisionGroupB);
+    const topBumperTwo = new Object(this, this.gameWidth * 0.5, 360, "sheet", "topBumper.png", shapes.topBumper, this.collisionGroupB);
+    const topBumperThree = new Object(this, this.gameWidth * 0.7, 250, "sheet", "topBumper.png", shapes.topBumper, this.collisionGroupB);
+    const leftBumper = new Object(this, this.gameWidth * 0.25, this.gameHeight * 0.7, "sheet", "leftBumper.png", shapes.leftBumper, this.collisionGroupB);
+    const rightBumper = new Object(this, this.gameWidth - this.gameWidth * 0.25, this.gameHeight * 0.7, "sheet", "rightBumper.png", shapes.rightBumper, this.collisionGroupB);
+    const leftRamp = new Object(this, this.gameWidth * 0.14, this.gameHeight * 0.75, "sheet", "leftRamp.png", shapes.leftRamp, this.collisionGroupB);
+    const rightRamp = new Object(this, this.gameWidth - this.gameWidth * 0.14, this.gameHeight * 0.75, "sheet", "rightRamp.png", shapes.rightRamp, this.collisionGroupB);
+    const leftFlipper = new Flipper(this, this.gameWidth * 0.31, this.gameHeight * 0.87, 'left', LeftTrigger, this.collisionGroupB);
+    const rightFlipper = new Flipper(this, this.gameWidth * 0.68, this.gameHeight * 0.87, 'right', RightTrigger, this.collisionGroupB);
+
+    
 
     this.launcher = new Launcher(
       this,
@@ -154,7 +135,8 @@ export default class GameScene extends Phaser.Scene {
       50,
       this.ball,
       'spring',
-      'closingPinRight'
+      'closingPinRight',
+      this.collisionGroupB
     );
 
     let score = this.add.text(70, 0, 'Score: ' + this.score, { fontSize: 18 }).setOrigin(0).setDepth(1);
@@ -178,10 +160,12 @@ export default class GameScene extends Phaser.Scene {
       this.gameWidth - 30,
       this.gameHeight - 200,
       'ball',
-      this.launcher
+      this.launcher, 
+      this.collisionGroupA
     );
     this.currentBall++; 
     
+    this.ball.setCollidesWith([this.collisionGroupA, this.collisionGroupB]);
   }
 
   resetBall() {

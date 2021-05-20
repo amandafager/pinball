@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
 
 export default class Object extends Phaser.Scene {
-  constructor(scene, x, y, sheet, texture, shapes) {
+  constructor(scene, x, y, sheet, texture, shapes, CG) {
     super(scene);
 
     scene.add.existing(this);
@@ -11,12 +11,12 @@ export default class Object extends Phaser.Scene {
     this.texture = texture;
     this.sheet = sheet;
     this.shapes = shapes;
-
+    this.cg = CG;
     const obj = this.scene.matter.add.sprite(0, 0, this.sheet, this.texture, {
       shape: this.shapes,
     });
-
+    obj.setCollisionGroup(this.cg);
     obj.setPosition(this.x + obj.centerOfMass.x, this.y + obj.centerOfMass.y);
-    //obj.setVelocity(10, -10);
+    // obj.setVelocity(10, -10);
   }
 }
