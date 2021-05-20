@@ -14,7 +14,7 @@ import Ball from '../assets/ball';
 import ballImage from '../images/ball.png';
 import shapes from '../assets/physics.json';
 import sheetJson from '../assets/pinball-sprites.json';
-import sheetPng from '../images/pinball-sprites2.png';
+import sheetPng from '../images/pinball-sprites.png';
 import Object from '../assets/object';
 
 import Flipper from '../assets/flippers';
@@ -183,7 +183,7 @@ export default class GameScene extends Phaser.Scene {
     );
     this.currentBall++; 
     
-    this.ball.setCollidesWith([this.collisionGroupA, this.collisionGroupB]);
+    // this.ball.setCollidesWith([this.collisionGroupA, this.collisionGroupB]);
   }
 
   resetBall() {

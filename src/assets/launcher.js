@@ -36,7 +36,7 @@ export default class Launcher {
       label: 'launcher',
     });
 
-    startLaunchPaddle.setCollisionGroup(this.cg);
+    // startLaunchPaddle.setCollisionGroup(this.cg);
 
     let launchPaddleLockSensor = this.scene.add.rectangle(
       this.x + 10,

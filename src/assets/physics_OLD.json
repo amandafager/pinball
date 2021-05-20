@@ -117,7 +117,7 @@
     },
     "fixtures": [
       {
-        "label": "topBumper",
+        "label": "",
         "isSensor": false,
         "circle": {
           "x": 56.81322423933826,
@@ -143,7 +143,7 @@
     },
     "fixtures": [
       {
-        "label": "sideBumper",
+        "label": "",
         "isSensor": false,
         "vertices": [
           [
@@ -173,7 +173,7 @@
     },
     "fixtures": [
       {
-        "label": "sideBumper",
+        "label": "",
         "isSensor": false,
         "vertices": [
           [
@@ -253,7 +253,7 @@
     "type": "fromPhysicsEditor",
     "label": "rightRamp",
     "isStatic": true,
-    "density": 0.10000000149011612,
+    "density": 0.1,
     "restitution": 0,
     "friction": 4,
     "frictionAir": 0.009999999776482582,
@@ -383,12 +383,70 @@
     "fixtures": [
       {
         "label": "",
-        "isSensor": true,
+        "isSensor": false,
         "circle": {
           "x": 22.4,
           "y": 22.700000000000003,
           "radius": 22.70110318353165
         }
+      }
+    ]
+  },
+  "closingPinLeft": {
+    "type": "fromPhysicsEditor",
+    "label": "closingPinLeft",
+    "isStatic": false,
+    "density": 0.10000000149011612,
+    "restitution": 0,
+    "friction": 0.10000000149011612,
+    "frictionAir": 0.009999999776482582,
+    "frictionStatic": 0.5,
+    "collisionFilter": {
+      "group": 0,
+      "category": 1,
+      "mask": 255
+    },
+    "fixtures": [
+      {
+        "label": "",
+        "isSensor": false,
+        "vertices": [
+          [
+            { "x": 62, "y": 60 },
+            { "x": 66, "y": 55 },
+            { "x": 0, "y": 7 },
+            { "x": 0, "y": 14 }
+          ]
+        ]
+      }
+    ]
+  },
+  "closingPinRight": {
+    "type": "fromPhysicsEditor",
+    "label": "closingPinRight",
+    "isStatic": false,
+    "density": 0.1,
+    "restitution": 0,
+    "friction": 0.1,
+    "frictionAir": 0.01,
+    "frictionStatic": 0.5,
+    "collisionFilter": {
+      "group": 0,
+      "category": 1,
+      "mask": 255
+    },
+    "fixtures": [
+      {
+        "label": "",
+        "isSensor": false,
+        "vertices": [
+          [
+            { "x": 4, "y": 63 },
+            { "x": 68, "y": 10 },
+            { "x": 68, "y": 3 },
+            { "x": 0, "y": 59 }
+          ]
+        ]
       }
     ]
   }

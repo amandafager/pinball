@@ -15,14 +15,15 @@ export default class Ball extends Phaser.Physics.Matter.Image {
       type: 'circle',
       radius: 18,
     });
-    this.setCollisionGroup(CG);
+    // this.setCollisionGroup(CG);
+    // this.setCollisionGroup(4);
+
     this.setAngularVelocity(0.01);
     this.setBounce(0 /* 0.6 */);
     this.setFrictionAir(0.0001 /* 1 */);
     this.setDensity(0.001);
     this.setFriction(0 /* 0, 0, 0 */);
     this.setData('onStart', true);
-    this.setCollisionGroup(4);
     this.preUpdate();
     this.ballCollsion();
     this.launcher = launcher;
