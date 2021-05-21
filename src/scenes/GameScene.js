@@ -20,6 +20,7 @@ import rightSmallBumper from '../images/rightSmallBumper.png';
 import star from '../images/star.png';
 import soundTrigger from '../sounds/trigger.mp3';
 
+
 export default class GameScene extends Phaser.Scene {
   constructor() {
     super('GameScene');
@@ -28,6 +29,7 @@ export default class GameScene extends Phaser.Scene {
     this.gameBalls = 0;
     this.score = 0;
     this.currentBall = 0;
+    this.gameStarted = false;
   }
 
   preload() {
@@ -133,7 +135,14 @@ export default class GameScene extends Phaser.Scene {
 
     this.scoreText = this.add.text(this.gameWidth * 0.05, 0 , 'Score: ' + this.score, { fontSize: 18 }).setOrigin(0).setDepth(1);
     this.ballsLeftText = this.add.text(this.gameWidth  * 0.78 , 0, 'Balls left: ' + this.gameBalls, { fontSize: 18}).setOrigin(0).setDepth(1);
-    this.newGame(); 
+
+    let startGame = document.querySelector("button");
+    startGame.addEventListener("click", () => {
+      document.querySelector(".welcomeScreen").remove();
+      this.newGame(); 
+      this.gameStarted = true;
+    });
+    
     this.collisions();
 }
 
@@ -150,7 +159,7 @@ export default class GameScene extends Phaser.Scene {
   getNewBall() {
     this.ball = new Ball(
       this,
-      this.gameWidth - 30,
+      30,
       this.gameHeight - 200,
       'ball',
       this.launcher, 
@@ -176,7 +185,10 @@ export default class GameScene extends Phaser.Scene {
 
   endGame(){
     this.ball.destroy(); 
-    console.log("Game end")
+    
+    document.querySelector(".finalScore").textContent = `finalScore: ${this.score}`;
+    document.querySelector(".gameOver").classList.remove('hidden');
+    
   }
 
   collisions() {
@@ -244,11 +256,13 @@ export default class GameScene extends Phaser.Scene {
   }
 
   update() {
-    this.resetBall();
+    if(this.gameStarted){
+      this.resetBall();
 
-    if(this.gameBalls === 0){
-      this.endGame();
-      this.newGame();
-    }  
+      if(this.gameBalls === 0){
+        this.endGame();
+        this.newGame();
+      }  
+    }
   }
 }
