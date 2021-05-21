@@ -18,6 +18,7 @@ import closingPinLeft from '../images/closingPinLeft.png';
 import leftSmallBumper from '../images/leftSmallBumper.png';
 import rightSmallBumper from '../images/rightSmallBumper.png';
 import star from '../images/star.png';
+import soundTrigger from '../sounds/trigger.mp3';
 
 export default class GameScene extends Phaser.Scene {
   constructor() {
@@ -44,16 +45,19 @@ export default class GameScene extends Phaser.Scene {
     this.load.atlas('sheet', sheetPng, sheetJson);
     this.load.json('shapes', shapes);
     this.load.image('star', star);
+    this.load.audio('triggerHit', soundTrigger);
   }
 
   create() {
+    this.soundTriggers = this.sound.add('triggerHit');
+    
     const shapes = this.cache.json.get('shapes');
     this.matter.world.setBounds(0, 0, this.gameWidth, this.gameHeight);
     this.back = this.add.image(0, 0, 'background').setOrigin(0, 0);
     this.back.scale = 1.15;
     this.backStrips = this.add.image(0, 0, 'backgroundStripes').setOrigin(0, 0);
     this.twoTimes = this.add.image(3, this.gameHeight - 150, 'sheet', '2x.png').setOrigin(0);
-    this.blackHole = this.add.image(3, this.gameHeight - 50, 'sheet', 'blackHole.png').setOrigin(0); 
+    
    
     const aPushed = this.input.keyboard.addKey('A');
     const dPushed = this.input.keyboard.addKey('D');
@@ -61,7 +65,7 @@ export default class GameScene extends Phaser.Scene {
     aPushed.on(
       'down',
       function () {
-        leftFlipper.flip();
+        leftFlipper.flip(this.soundTriggers);
       },
       this
     );
@@ -77,7 +81,7 @@ export default class GameScene extends Phaser.Scene {
     dPushed.on(
       'down',
       function () {
-        rightFlipper.flip();
+        rightFlipper.flip(this.soundTriggers);
       },
       this
     );
@@ -90,20 +94,29 @@ export default class GameScene extends Phaser.Scene {
       this
     );
 
-    const rightSmallBumper = new Object(this, this.gameWidth - this.gameWidth * 0.25, this.gameHeight * 0.45, "sheet", "rightSmallBumper.png", shapes.rightSmallBumper);
-    const leftSmallBumper = new Object(this, this.gameWidth * 0.25, this.gameHeight * 0.45, "sheet", "leftSmallBumper.png", shapes.leftSmallBumper);
+    const rightSmallBumper = new Object(this, this.gameWidth - this.gameWidth * 0.17, this.gameHeight * 0.40, "sheet", "rightSmallBumper.png", shapes.rightSmallBumper);
+    const leftSmallBumper = new Object(this, this.gameWidth * 0.17, this.gameHeight * 0.40, "sheet", "leftSmallBumper.png", shapes.leftSmallBumper);
     const blackDividerRight = new Object(this, this.gameWidth - 70, this.gameHeight - 70, "sheet", "black_divider.png", shapes.black_divider);
     const blackDividerLeft = new Object(this, 70, this.gameHeight - 70, "sheet", "black_divider.png", shapes.black_divider);
     const topHalfMoon = new Object(this, 400, 68, "sheet", "topHalfMoon.png", shapes.topHalfMoon);
-    const topBumperOne = new Object(this, this.gameWidth * 0.3, 250, "sheet", "topBumper.png", shapes.topBumper);
-    const topBumperTwo = new Object(this, this.gameWidth * 0.5, 360, "sheet", "topBumper.png", shapes.topBumper);
-    const topBumperThree = new Object(this, this.gameWidth * 0.7, 250, "sheet", "topBumper.png", shapes.topBumper);
+    const topBumperOne = new Object(this, this.gameWidth * 0.35, 200, "sheet", "topBumper.png", shapes.topBumper);
+    const topBumperTwo = new Object(this, this.gameWidth * 0.5, 350, "sheet", "topBumper.png", shapes.topBumper);
+    const topBumperThree = new Object(this, this.gameWidth * 0.65, 200, "sheet", "topBumper.png", shapes.topBumper);
     const leftBumper = new Object(this, this.gameWidth * 0.25, this.gameHeight * 0.7, "sheet", "leftBumper.png", shapes.leftBumper);
     const rightBumper = new Object(this, this.gameWidth - this.gameWidth * 0.25, this.gameHeight * 0.7, "sheet", "rightBumper.png", shapes.rightBumper);
     const leftRamp = new Object(this, this.gameWidth * 0.14, this.gameHeight * 0.744, "sheet", "leftRamp.png", shapes.leftRamp);
     const rightRamp = new Object(this, this.gameWidth - this.gameWidth * 0.14, this.gameHeight * 0.744, "sheet", "rightRamp.png", shapes.rightRamp);
-    const leftFlipper = new Flipper(this, this.gameWidth * 0.31, this.gameHeight * 0.87, 'left', shapes.leftTrigger);
-    const rightFlipper = new Flipper(this, this.gameWidth * 0.68, this.gameHeight * 0.87, 'right', shapes.rightTrigger);
+    const leftFlipper = new Flipper(this, this.gameWidth * 0.31, this.gameHeight * 0.87, 'left', shapes.leftTrigger, this.soundTriggers);
+    const rightFlipper = new Flipper(this, this.gameWidth * 0.68, this.gameHeight * 0.87, 'right', shapes.rightTrigger, this.soundTriggers);
+
+
+    let leftSpringSensor = this.add.rectangle(25, this.gameHeight - 130, 60, 10);
+    this.matter.add.gameObject(leftSpringSensor, { isSensor: true, isStatic: true, label: 'leftSpringSensor'});
+    this.leftSpring = this.add.image(25, this.gameHeight - 30, 'spring');
+    this.matter.add.gameObject(this.leftSpring, {
+      isStatic: true,
+      friction: 0,
+    });
 
     this.launcher = new Launcher(
       this,
@@ -147,6 +160,7 @@ export default class GameScene extends Phaser.Scene {
           this.gameBalls--;
           this.getNewBall();
           this.updateBallsLeftText();
+          this.launcher.resetValves();
       }
 
       if(this.ball.getData('dead')) {
@@ -154,7 +168,6 @@ export default class GameScene extends Phaser.Scene {
         this.gameBalls--;
         this.getNewBall();
         this.updateBallsLeftText();
-        this.launcher.resetValves();
       }
   } 
 
@@ -166,7 +179,25 @@ export default class GameScene extends Phaser.Scene {
   collisions() {
     this.matter.world.on('collisionstart', (event, bodyA, bodyB) => {
 
-      console.log(bodyA.label);
+      console.log(bodyA.label, bodyB.label);
+
+      if(bodyA.label == 'leftSpringSensor'){
+        console.log(this.leftSpring.y);
+        this.launchLeftTimer = setInterval(() => {
+          if (this.leftSpring.y <= 1230) {
+            this.leftSpring.setPosition(
+              this.leftSpring.x,
+              this.leftSpring.y + 2,
+              null
+            );
+          }
+          if(this.leftSpring.y >= 1230){
+            let velocity = this.launcher.setBallVelocity(80);
+            this.ball.updateVelocity(velocity.vx, velocity.vy);
+            clearInterval(this.launchLeftTimer);
+          }
+        }, 50);
+      }
     
       if (bodyA.label === 'sideBumper') {
        bodyA.gameObject.setTint(0xffff00);  

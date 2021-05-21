@@ -80,7 +80,8 @@ export default class Launcher {
         const { bodyA, bodyB } = pair;
 
         if (bodyA.label == 'launchPaddleLockSensor') {
-          if (launchPaddleLock.x >= gameWidth) {
+          console.log(launchPaddleLock.x, gameWidth);
+          if (launchPaddleLock.x >= gameWidth + 1) {
             setTimeout(() => {
               launchPaddleLock.setPosition(
                 launchPaddleLock.x - 100,
@@ -144,6 +145,7 @@ export default class Launcher {
       'up',
       function () {
         clearInterval(this.startTimer);
+        console.log(this.pushLevel);
         let velocity = this.setBallVelocity(this.pushLevel);
         this.ball.updateVelocity(velocity.vx, velocity.vy);
         setTimeout(() => {

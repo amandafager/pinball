@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
 
 export default class Object extends Phaser.Scene {
-  constructor(scene, x, y, sheet, texture, shapes, CG) {
+  constructor(scene, x, y, sheet, texture, shapes) {
     super(scene);
 
     scene.add.existing(this);
@@ -11,7 +11,6 @@ export default class Object extends Phaser.Scene {
     this.texture = texture;
     this.sheet = sheet;
     this.shapes = shapes;
-    this.cg = CG;
     const obj = this.scene.matter.add.sprite(0, 0, this.sheet, this.texture, {
       shape: this.shapes,
     });
