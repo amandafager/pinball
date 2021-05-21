@@ -1,8 +1,30 @@
 <html>
   <head>
     <title>PINBALL</title>
+    <link href="../tailwind.css" rel="stylesheet" />
   </head>
   <body>
     <script src="main.js"></script>
+    <div class="welcomeScreen absolute top-0 bg-black w-full h-full opacity-90 z-10">
+      <div class="flex flex-col w-full h-full bg-blue z-20 justify-center items-center">
+        <div class="text-3xl text-white">Welcome to Pinball!</div>
+        <div class="text-2xl text-white">You play with A and D</div>
+        <div class="text-2xl text-white">Fire away with Space</div>
+        <div class="text-2xl text-white">Click the button to start</div>
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-10 rounded-full">
+          Lets play!
+        </button>
+      </div>
+    </div>
+    <div class="gameOver absolute top-0 bg-black w-full h-full opacity-90 z-10 hidden">
+      <div class="flex flex-col w-full h-full bg-blue z-20 justify-center items-center">
+        <div class="text-3xl text-white">Game Over!</div>
+        <div class="finalScore text-2xl text-white"></div>
+        <div class="text-2xl text-white">Click the button to play again</div>
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-10 rounded-full">
+          Lets play!
+        </button>
+      </div>
+    </div>
   </body>
 </html>
