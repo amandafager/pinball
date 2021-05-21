@@ -1,6 +1,6 @@
 
 export default class Flipper extends Phaser.Scene  {
-  constructor(scene, x, y, orientation, shapes) {
+  constructor(scene, x, y, orientation, shapes, soundTrigger) {
     super(scene);
     this.scene = scene;
     this.x = x;
@@ -17,6 +17,7 @@ export default class Flipper extends Phaser.Scene  {
     this.startPosition = 108;
     this.endPosition = 141;
     this.isFlipping = false;
+    this.soundTrigger = soundTrigger;
 
     if(this.orientation === 'right'){
         this.blockOffsetX = -this.flipperOffsetY * 2;
@@ -58,7 +59,6 @@ export default class Flipper extends Phaser.Scene  {
         this.flipper = this.scene.matter.add.sprite(this.x, this.y, "sheet", "RightTrigger.png", {
             shape: this.shapes,
           }).setExistingBody(this.flipperBody);
-          
     } else {
        
     }
@@ -120,8 +120,9 @@ export default class Flipper extends Phaser.Scene  {
     };
     
 
-    flip(){
+    flip(soundTriggers){
         
+        soundTriggers.play();
         this.isFlipping = true
         this.scene.tweens.add({
             targets: this.pistonPin,

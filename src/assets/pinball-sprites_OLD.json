@@ -1,0 +1,251 @@
+{
+	"textures": [
+		{
+			"image": "pinball-sprites2.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 1214,
+				"h": 433
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "leftRamp.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 204,
+						"h": 420
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 204,
+						"h": 420
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 204,
+						"h": 420
+					}
+				},
+				{
+					"filename": "rightRamp.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 204,
+						"h": 420
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 204,
+						"h": 420
+					},
+					"frame": {
+						"x": 207,
+						"y": 1,
+						"w": 204,
+						"h": 420
+					}
+				},
+				{
+					"filename": "topHalfMoon.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 800,
+						"h": 229
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 800,
+						"h": 229
+					},
+					"frame": {
+						"x": 413,
+						"y": 1,
+						"w": 800,
+						"h": 229
+					}
+				},
+				{
+					"filename": "leftBumper.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 114,
+						"h": 200
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 114,
+						"h": 200
+					},
+					"frame": {
+						"x": 413,
+						"y": 232,
+						"w": 114,
+						"h": 200
+					}
+				},
+				{
+					"filename": "rightBumper.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 114,
+						"h": 200
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 114,
+						"h": 200
+					},
+					"frame": {
+						"x": 529,
+						"y": 232,
+						"w": 114,
+						"h": 200
+					}
+				},
+				{
+					"filename": "black_divider.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 41,
+						"h": 153
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 41,
+						"h": 153
+					},
+					"frame": {
+						"x": 645,
+						"y": 232,
+						"w": 41,
+						"h": 153
+					}
+				},
+				{
+					"filename": "2x.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 45,
+						"h": 45
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 45,
+						"h": 45
+					},
+					"frame": {
+						"x": 645,
+						"y": 387,
+						"w": 45,
+						"h": 45
+					}
+				},
+				{
+					"filename": "topBumper.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 114,
+						"h": 114
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 114,
+						"h": 114
+					},
+					"frame": {
+						"x": 688,
+						"y": 232,
+						"w": 114,
+						"h": 114
+					}
+				},
+				{
+					"filename": "LeftTrigger.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 164,
+						"h": 51
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 164,
+						"h": 51
+					},
+					"frame": {
+						"x": 692,
+						"y": 348,
+						"w": 164,
+						"h": 51
+					}
+				},
+				{
+					"filename": "RightTrigger.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 164,
+						"h": 51
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 164,
+						"h": 51
+					},
+					"frame": {
+						"x": 804,
+						"y": 232,
+						"w": 164,
+						"h": 51
+					}
+				},
+				{
+					"filename": "blackHole.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 43,
+						"h": 44
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 43,
+						"h": 44
+					},
+					"frame": {
+						"x": 804,
+						"y": 285,
+						"w": 43,
+						"h": 44
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:6559cb7842b8d686f5eebc077377d66a:28af3515efebe9d154c95b3ecb2931a4:5602cdfa346dd8df588afc0b82b00426$"
+	}
+}

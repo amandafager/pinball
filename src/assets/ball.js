@@ -15,6 +15,7 @@ export default class Ball extends Phaser.Physics.Matter.Image {
       type: 'circle',
       radius: 18,
     });
+
     this.setAngularVelocity(0.01);
     this.setBounce(0.3);
     this.setFrictionAir(0.0001);
