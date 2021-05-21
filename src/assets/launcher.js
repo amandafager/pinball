@@ -1,7 +1,8 @@
 import Phaser from 'phaser';
+import Object from './object';
 
 export default class Launcher {
-  constructor(scene, x, y, width, ball, spring, closingPinRight) {
+  constructor(scene, x, y, width, ball, spring, sheet, texture, shapes) {
     scene.add.existing(this);
     this.scene = scene;
     this.width = width;
@@ -10,8 +11,10 @@ export default class Launcher {
     this.y = y;
     this.ball = ball;
     this.spring = spring;
-    this.closingPinRight = closingPinRight;
     this.colliding = false;
+    this.sheet = sheet;
+    this.texture = texture;
+    this.shapes = shapes;
 
     this.drawShape();
     this.releaseBall(this.ball);
@@ -51,18 +54,18 @@ export default class Launcher {
     this.launchPaddlePosition = startLaunchPaddle.y;
     this.startLaunchPaddle = startLaunchPaddle;
 
-    this.launchPaddleLock = this.scene.add.image(
+    this.launchPaddleLock = this.scene.matter.add.sprite(
       this.x + 0,
-      this.y * 0.88,
-      'closingPinRight'
+      this.y * 0.887,
+      this.sheet,
+      this.texture,
+      {
+        shape: this.shapes,
+      }
     );
 
-    this.scene.matter.add.gameObject(this.launchPaddleLock, {
-      isStatic: true,
-      label: 'launchPaddleLock',
-    });
     this.launchPaddleLock.setPosition(
-      this.launchPaddleLock.x + 100,
+      this.launchPaddleLock.x + 95,
       this.launchPaddleLock.y
     );
   }

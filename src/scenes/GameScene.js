@@ -62,6 +62,7 @@ export default class GameScene extends Phaser.Scene {
     const aPushed = this.input.keyboard.addKey('A');
     const dPushed = this.input.keyboard.addKey('D');
 
+
     aPushed.on(
       'down',
       function () {
@@ -125,7 +126,9 @@ export default class GameScene extends Phaser.Scene {
       50,
       this.ball,
       'spring',
-      'closingPinRight',
+      'sheet',
+      'closingPinRight.png',
+      shapes.closingPinRight
     );
 
     this.scoreText = this.add.text(this.gameWidth * 0.05, 0 , 'Score: ' + this.score, { fontSize: 18 }).setOrigin(0).setDepth(1);
@@ -192,6 +195,7 @@ export default class GameScene extends Phaser.Scene {
             );
           }
           if(this.leftSpring.y >= 1230){
+           //this.ball.setVelocityY(-20);
             let velocity = this.launcher.setBallVelocity(80);
             this.ball.updateVelocity(velocity.vx, velocity.vy);
             clearInterval(this.launchLeftTimer);
@@ -206,6 +210,9 @@ export default class GameScene extends Phaser.Scene {
         this.star = this.add.image(bodyA.gameObject.x,  bodyA.gameObject.y - 2, "star").setScale(1.1);
         this.star.setVisible(true);
       }
+      if (bodyA.label === 'sideSmallBumper') {
+        bodyA.gameObject.setTint(0xffff00);  
+      }  
     });
 
     this.matter.world.on('collisionend', (event, bodyA, bodyB) => {
@@ -220,6 +227,11 @@ export default class GameScene extends Phaser.Scene {
         this.updateScoreText();
         this.star.setVisible(false);
       }
+      if (bodyA.label === 'sideSmallBumper') {
+        this.score = this.score + 700;
+        this.updateScoreText();
+        bodyA.gameObject.clearTint(); 
+      }       
     });
   }
 
@@ -232,7 +244,6 @@ export default class GameScene extends Phaser.Scene {
   }
 
   update() {
-  
     this.resetBall();
 
     if(this.gameBalls === 0){

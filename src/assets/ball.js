@@ -17,7 +17,7 @@ export default class Ball extends Phaser.Physics.Matter.Image {
     });
 
     this.setAngularVelocity(0.01);
-    this.setBounce(0.3);
+    this.setBounce(0);
     this.setFrictionAir(0.0001);
     this.setDensity(0.001);
     this.setFriction(0);
@@ -41,6 +41,13 @@ export default class Ball extends Phaser.Physics.Matter.Image {
       if (bodyA.label === 'launcher') {
         if (!this.getData('onStart'))
           this.setData('onStart', true) && this.setData('dead', true);
+      }
+      if (bodyA.label == 'leftSpringSensor') {
+        this.setData('onStart', true);
+      }
+      if (!this.getData('onStart') && bodyB.label === 'Circle Body') {
+        //bodyB.gameObject.setBounce(0.3);
+        //bodyB.gameObject.updateVelocity(10, 10);
       }
     });
   }

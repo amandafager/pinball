@@ -437,7 +437,7 @@
     },
     "fixtures": [
       {
-        "label": "",
+        "label": "launchPaddleLock",
         "isSensor": false,
         "vertices": [
           [
@@ -466,7 +466,7 @@
     },
     "fixtures": [
       {
-        "label": "",
+        "label": "sideSmallBumper",
         "isSensor": false,
         "vertices": [
           [
@@ -478,7 +478,7 @@
         ]
       },
       {
-        "label": "",
+        "label": "sideSmallBumper",
         "isSensor": false,
         "circle": {
           "x": 76.38483965014576,
@@ -487,7 +487,7 @@
         }
       },
       {
-        "label": "",
+        "label": "sideSmallBumper",
         "isSensor": false,
         "circle": {
           "x": 18.65889212827988,
@@ -513,7 +513,7 @@
     },
     "fixtures": [
       {
-        "label": "",
+        "label": "sideSmallBumper",
         "isSensor": false,
         "vertices": [
           [
@@ -525,7 +525,7 @@
         ]
       },
       {
-        "label": "",
+        "label": "sideSmallBumper",
         "isSensor": false,
         "circle": {
           "x": 17.78425655976676,
@@ -534,7 +534,7 @@
         }
       },
       {
-        "label": "",
+        "label": "sideSmallBumper",
         "isSensor": false,
         "circle": {
           "x": 75.21865889212827,
