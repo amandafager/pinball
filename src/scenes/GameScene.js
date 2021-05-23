@@ -138,7 +138,8 @@ export default class GameScene extends Phaser.Scene {
       'spring',
       'sheet',
       'closingPinRight.png',
-      shapes.closingPinRight
+      shapes.closingPinRight,
+      this.leftSpringLaunch
     );
 
     this.scoreText = this.add.text(this.gameWidth * 0.05, 0 , 'Score: ' + this.score, { fontSize: 18 }).setOrigin(0).setDepth(1);
