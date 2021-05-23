@@ -16,6 +16,5 @@ export default class Object extends Phaser.Scene {
     });
     obj.body.restitution = 0.8;
     obj.setPosition(this.x + obj.centerOfMass.x, this.y + obj.centerOfMass.y);
-    //obj.setVelocity(10, -10);
   }
 }
