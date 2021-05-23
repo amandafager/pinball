@@ -142,8 +142,8 @@ export default class GameScene extends Phaser.Scene {
       this.leftSpringLaunch
     );
 
-    this.scoreText = this.add.text(this.gameWidth * 0.05, 0 , 'Score: ' + this.score, { fontSize: 18 }).setOrigin(0).setDepth(1);
-    this.ballsLeftText = this.add.text(this.gameWidth  * 0.78 , 0, 'Balls left: ' + this.gameBalls, { fontSize: 18}).setOrigin(0).setDepth(1);
+
+
 
     let startGame = document.querySelector("button");
     startGame.addEventListener("click", () => {
@@ -154,7 +154,35 @@ export default class GameScene extends Phaser.Scene {
       this.spacePushed.enabled = true;
     }); 
 
+    this.addTextOnScene();
     this.collisions();
+  }
+
+
+  addTextOnScene() {
+    let scoreTextX; 
+    let scoreTextY; 
+    let ballsLeftTextX;
+    let ballsLeftTextY;  
+
+    const brave = window.navigator.brave;
+    if(brave) {
+      console.log("brave")
+      scoreTextX = this.gameWidth * 0.05; 
+      scoreTextY = - 95; 
+      ballsLeftTextX = this.gameWidth  * 0.78;
+      ballsLeftTextY= - 95; 
+    }
+    else {
+      console.log("no brave")
+      scoreTextX = this.gameWidth * 0.05; 
+      scoreTextY = 15; 
+      ballsLeftTextX = this.gameWidth  * 0.78;
+      ballsLeftTextY= 15; 
+    }
+
+    this.scoreText = this.add.text(scoreTextX, scoreTextY, 'Score: ' + this.score, { fontSize: 18 }).setOrigin(0).setDepth(1);
+    this.ballsLeftText = this.add.text(ballsLeftTextX , ballsLeftTextY, 'Balls left: ' + this.gameBalls, { fontSize: 18}).setOrigin(0).setDepth(1);
   }
 
   newGame() {  
