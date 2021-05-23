@@ -16,6 +16,5 @@ export default class Object extends Phaser.Scene {
     });
     obj.setCollisionGroup(this.cg);
     obj.setPosition(this.x + obj.centerOfMass.x, this.y + obj.centerOfMass.y);
-    //obj.setVelocity(10, -10);
   }
 }
