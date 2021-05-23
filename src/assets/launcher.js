@@ -1,6 +1,3 @@
-import Phaser from 'phaser';
-import Object from './object';
-
 export default class Launcher {
   constructor(scene, x, y, width, ball, spring, sheet, texture, shapes) {
     scene.add.existing(this);
@@ -18,8 +15,6 @@ export default class Launcher {
 
     this.drawShape();
     this.releaseBall(this.ball);
-    this.fill = 0;
-    this.debug = this.scene.add.graphics();
     this.spacePushed = this.scene.input.keyboard.addKey('space');
     this.collisionTest();
   }
@@ -101,7 +96,7 @@ export default class Launcher {
     this.ball = ball;
     this.ball.x = this.x;
     this.ball.y = this.y - this.height / 2 - this.ball.height / 2;
-    this.ball.setVelocity(0);
+    this.ball.setVelocity(0, 0);
     this.ball.setData('onStart', true);
   }
 
@@ -133,11 +128,14 @@ export default class Launcher {
         this.startTimer = setInterval(() => {
           if (this.startLaunchPaddle.y <= 1240) {
             this.pushLevel = this.pushLevel + 1;
-            this.startLaunchPaddle.setPosition(
-              this.startLaunchPaddle.x,
-              this.startLaunchPaddle.y + 2,
-              null
-            );
+
+            if (this.ball.getData('onStart')) {
+              this.startLaunchPaddle.setPosition(
+                this.startLaunchPaddle.x,
+                this.startLaunchPaddle.y + 2,
+                null
+              );
+            }
           }
         }, 50);
       },
@@ -150,7 +148,11 @@ export default class Launcher {
         clearInterval(this.startTimer);
         console.log(this.pushLevel);
         let velocity = this.setBallVelocity(this.pushLevel);
-        this.ball.updateVelocity(velocity.vx, velocity.vy);
+        if (this.ball.getData('onStart')) {
+          this.ball.updateVelocity(velocity.vx, velocity.vy);
+          this.ball.setData('onStart', false);
+        }
+
         setTimeout(() => {
           this.startLaunchPaddle.setPosition(
             this.startLaunchPaddle.x,

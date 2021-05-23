@@ -29,11 +29,8 @@ export default class Ball extends Phaser.Physics.Matter.Image {
   }
 
   updateVelocity(vx, vy) {
-    if (this.getData('onStart')) {
-      this.setVelocityX(vx);
-      this.setVelocityY(vy);
-      this.setData('onStart', false);
-    }
+    this.setVelocityX(vx);
+    this.setVelocityY(vy);
   }
 
   ballCollision() {
@@ -42,12 +39,8 @@ export default class Ball extends Phaser.Physics.Matter.Image {
         if (!this.getData('onStart'))
           this.setData('onStart', true) && this.setData('dead', true);
       }
-      if (bodyA.label == 'leftSpringSensor') {
-        this.setData('onStart', true);
-      }
-      if (!this.getData('onStart') && bodyB.label === 'Circle Body') {
-        //bodyB.gameObject.setBounce(0.3);
-        //bodyB.gameObject.updateVelocity(10, 10);
+      if (bodyA.label == 'leftSpring') {
+        if (!this.getData('onLeftSpring')) this.setData('onLeftSpring', true);
       }
     });
   }
