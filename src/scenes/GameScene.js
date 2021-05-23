@@ -12,7 +12,12 @@ import Object from '../assets/object';
 import Flipper from '../assets/flippers';
 import spring from '../images/spring.png';
 import star from '../images/star.png';
+import greenDot from '../images/greenDot.png';
+
 import soundTrigger from '../sounds/trigger.mp3';
+import soundStart from '../sounds/start.wav';
+import soundBumperHit from '../sounds/bumperHit.wav';
+import soundLeftSpringLaunch from '../sounds/leftSpringLaunch.wav';
 
 
 export default class GameScene extends Phaser.Scene {
@@ -32,14 +37,23 @@ export default class GameScene extends Phaser.Scene {
     this.load.image('background', background);
     this.load.image('backgroundStripes', backgroundStripes);
     this.load.image('spring', spring);
+    this.load.image('greenDot', greenDot);
     this.load.atlas('sheet', sheetPng, sheetJson);
     this.load.json('shapes', shapes);
     this.load.image('star', star);
     this.load.audio('triggerHit', soundTrigger);
+    this.load.audio('startGame', soundStart);
+    this.load.audio('bumperHit', soundBumperHit);
+    this.load.audio('leftSpringLaunch', soundLeftSpringLaunch);
   }
 
   create() {
     this.soundTriggers = this.sound.add('triggerHit');
+    this.soundStartGame = this.sound.add('startGame');
+    this.bumperHit = this.sound.add('bumperHit');
+    this.leftSpringLaunch = this.sound.add('leftSpringLaunch');
+
+
     
     const shapes = this.cache.json.get('shapes');
     this.matter.world.setBounds(0, 0, this.gameWidth, this.gameHeight);
@@ -47,6 +61,8 @@ export default class GameScene extends Phaser.Scene {
     this.back.scale = 1.15;
     this.backStrips = this.add.image(0, 0, 'backgroundStripes').setOrigin(0, 0);
     this.twoTimes = this.add.image(3, this.gameHeight - 150, 'sheet', '2x.png').setOrigin(0);
+    
+
     
     this.spacePushed = this.input.keyboard.addKey('space');
     this.spacePushed.enabled = false;
@@ -131,6 +147,7 @@ export default class GameScene extends Phaser.Scene {
     let startGame = document.querySelector("button");
     startGame.addEventListener("click", () => {
       document.querySelector(".welcomeScreen").remove();
+      this.soundStartGame.play();
       this.newGame(); 
       this.gameStarted = true;
       this.spacePushed.enabled = true;
@@ -147,6 +164,21 @@ export default class GameScene extends Phaser.Scene {
     this.getNewBall();
     this.updateBallsLeftText();
     this.updateScoreText();
+
+    let loadingGreenDots = 1;
+    this.greenDotsGroup = this.add.group();
+    setInterval(() => {
+      if(loadingGreenDots <= 4){
+         if(loadingGreenDots === 4){ this.greenDotsGroup.add(this.add.image(106, 960, 'greenDot')); this.greenDotsGroup.add(this.add.image(695, 960, 'greenDot')); } 
+         if(loadingGreenDots === 3){ this.greenDotsGroup.add(this.add.image(134, 978, 'greenDot')); this.greenDotsGroup.add(this.add.image(668, 978, 'greenDot')); } 
+         if(loadingGreenDots === 2){ this.greenDotsGroup.add(this.add.image(161, 995, 'greenDot')); this.greenDotsGroup.add(this.add.image(642, 995, 'greenDot')); } 
+         if(loadingGreenDots === 1){ this.greenDotsGroup.add(this.add.image(188, 1012, 'greenDot')); this.greenDotsGroup.add(this.add.image(615, 1012, 'greenDot')); } 
+      }else{
+        this.greenDotsGroup.clear(true);
+        clearInterval();
+      }
+      loadingGreenDots++;
+    }, 850);
     this.leftSpringLock.setPosition(this.leftSpring.x + 8 - this.leftSpringLock.width, this.leftSpring.y - 136);
   }
 
@@ -213,6 +245,7 @@ export default class GameScene extends Phaser.Scene {
           if(this.leftSpring.y >= 1230){
             let velocity = this.launcher.setBallVelocity(80);
             this.ball.updateVelocity(velocity.vx, velocity.vy);
+            this.leftSpringLaunch.play();
             this.ball.setData('onLeftSpring', false);
             setTimeout(() => {
               this.leftSpringLock.setPosition(this.leftSpringLock.x -  (this.leftSpringLock.x - (this.leftSpringLock.width / 2)) , this.leftSpringLock.y); 
@@ -236,6 +269,7 @@ export default class GameScene extends Phaser.Scene {
       if (bodyA.label === 'topBumper') {
         this.star = this.add.image(bodyA.gameObject.x,  bodyA.gameObject.y - 2, "star").setScale(1.1);
         this.star.setVisible(true);
+        this.bumperHit.play();
       }
       if (bodyA.label === 'sideSmallBumper') {
         bodyA.gameObject.setTint(0xffff00);  
