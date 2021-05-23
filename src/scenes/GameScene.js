@@ -37,10 +37,6 @@ export default class GameScene extends Phaser.Scene {
     this.load.image('background', background);
     this.load.image('backgroundStripes', backgroundStripes);
     this.load.image('spring', spring);
-    this.load.image('closingPinRight', closingPinRight);
-    this.load.image('closingPinLeft', closingPinLeft);
-    this.load.image('leftSmallBumper', leftSmallBumper);
-    this.load.image('rightSmallBumper', rightSmallBumper);
     this.load.image('greenDot', greenDot);
     this.load.atlas('sheet', sheetPng, sheetJson);
     this.load.json('shapes', shapes);
