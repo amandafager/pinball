@@ -17,7 +17,7 @@ export default class Ball extends Phaser.Physics.Matter.Image {
     });
 
     this.setAngularVelocity(0.01);
-    this.setBounce(0);
+    this.setBounce(0.2);
     this.setFrictionAir(0.0001);
     this.setDensity(0.001);
     this.setFriction(0);
@@ -36,11 +36,13 @@ export default class Ball extends Phaser.Physics.Matter.Image {
   ballCollision() {
     this.scene.matter.world.on('collisionstart', (event, bodyA, bodyB) => {
       if (bodyA.label === 'launcher') {
+        // this.setBounce(0);
         if (!this.getData('onStart'))
           this.setData('onStart', true) && this.setData('dead', true);
-      }
-      if (bodyA.label == 'leftSpring') {
+      } else if (bodyA.label == 'leftSpring') {
         if (!this.getData('onLeftSpring')) this.setData('onLeftSpring', true);
+      } else {
+        // this.setBounce(1);
       }
     });
   }
