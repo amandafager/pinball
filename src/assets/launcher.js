@@ -52,7 +52,8 @@ export default class Launcher {
 
     this.launchPaddleLock = this.scene.matter.add.sprite(
       this.x + 0,
-      this.y * 0.887,
+      // this.y * 0.887,
+      this.y * 0.54,
       this.sheet,
       this.texture,
       {
