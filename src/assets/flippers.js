@@ -50,13 +50,13 @@ export default class Flipper extends Phaser.Scene  {
     })
 
     if (this.orientation === 'left') {
-        this.flipper = this.scene.matter.add.sprite(this.x, this.y, "sheet", "LeftTrigger.png", {
+        this.flipper = this.scene.matter.add.sprite(this.x, this.y, 'sheet', 'LeftTrigger.png', {
             shape: this.shapes,
           });
         this.flipper.setExistingBody(this.flipperBody);
 
     } else if (this.orientation === 'right') {
-        this.flipper = this.scene.matter.add.sprite(this.x, this.y, "sheet", "RightTrigger.png", {
+        this.flipper = this.scene.matter.add.sprite(this.x, this.y, 'sheet', 'RightTrigger.png', {
             shape: this.shapes,
           }).setExistingBody(this.flipperBody);
     } else {
