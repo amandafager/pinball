@@ -21,31 +21,23 @@ export default class Launcher {
   }
 
   drawShape() {
-    let startLaunchPaddle = this.scene.add.image(
-      this.x,
-      this.y,
-      this.spring,
-      this.scene
-    );
-
-    this.scene.matter.add.gameObject(startLaunchPaddle, {
+    let startLaunchPaddle = this.scene.matter.add.image(this.x, this.y, this.spring, null, { 
       isStatic: true,
       friction: 0,
       label: 'launcher',
     });
 
-    let launchPaddleLockSensor = this.scene.add.rectangle(
+    let launchPaddleLockSensor = this.scene.matter.add.rectangle(
       this.x + 10,
       this.y * 0.6,
       60,
-      10
+      10,
+      {
+        isSensor: true,
+        isStatic: true,
+        label: 'launchPaddleLockSensor',
+      }
     );
-
-    this.scene.matter.add.gameObject(launchPaddleLockSensor, {
-      isSensor: true,
-      isStatic: true,
-      label: 'launchPaddleLockSensor',
-    });
 
     this.launchPaddlePosition = startLaunchPaddle.y;
     this.startLaunchPaddle = startLaunchPaddle;
@@ -74,13 +66,11 @@ export default class Launcher {
   collisionTest() {
     const launchPaddleLock = this.launchPaddleLock;
     const gameWidth = this.x;
-    console.log(launchPaddleLock.x, gameWidth);
     this.scene.matter.world.on('collisionend', function (event) {
       event.pairs.forEach((pair) => {
         const { bodyA, bodyB } = pair;
 
         if (bodyA.label == 'launchPaddleLockSensor') {
-          console.log(launchPaddleLock.x, gameWidth);
           if (launchPaddleLock.x >= gameWidth + 1) {
             setTimeout(() => {
               launchPaddleLock.setPosition(
@@ -106,9 +96,7 @@ export default class Launcher {
     let vx;
     let vy;
 
-    if (pushLevel <= 3) (vx = 0), (vy = -5);
-
-    if (pushLevel >= 4 && pushLevel <= 6) (vx = 0), (vy = -10);
+    if (pushLevel <= 6) (vx = 0), (vy = -10);
 
     if (pushLevel >= 7 && pushLevel <= 10) (vx = 0), (vy = -20);
 
@@ -148,7 +136,6 @@ export default class Launcher {
       'up',
       function () {
         clearInterval(this.startTimer);
-        console.log(this.pushLevel);
         let velocity = this.setBallVelocity(this.pushLevel);
         this.launchSound.play();
         if (this.ball.getData('onStart')) {
