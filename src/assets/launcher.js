@@ -1,5 +1,5 @@
 export default class Launcher {
-  constructor(scene, x, y, width, ball, spring, sheet, texture, shapes) {
+  constructor(scene, x, y, width, ball, spring, sheet, texture, shapes, launchSound) {
     scene.add.existing(this);
     this.scene = scene;
     this.width = width;
@@ -12,6 +12,7 @@ export default class Launcher {
     this.sheet = sheet;
     this.texture = texture;
     this.shapes = shapes;
+    this.launchSound = launchSound;
 
     this.drawShape();
     this.releaseBall(this.ball);
@@ -51,7 +52,8 @@ export default class Launcher {
 
     this.launchPaddleLock = this.scene.matter.add.sprite(
       this.x + 0,
-      this.y * 0.887,
+      // this.y * 0.887,
+      this.y * 0.54,
       this.sheet,
       this.texture,
       {
@@ -148,6 +150,7 @@ export default class Launcher {
         clearInterval(this.startTimer);
         console.log(this.pushLevel);
         let velocity = this.setBallVelocity(this.pushLevel);
+        this.launchSound.play();
         if (this.ball.getData('onStart')) {
           this.ball.updateVelocity(velocity.vx, velocity.vy);
           this.ball.setData('onStart', false);
