@@ -24,9 +24,10 @@ export default class Flipper extends Phaser.Scene  {
         this.flipperOffsetX = -this.flipperOffsetX;
     }
 
-    this.block = this.scene.matter.add.image(this.x + this.blockOffsetX,this.y + this.blockOffsetY, 'rectA', this.scene, {
+    /* this.block = this.scene.matter.add.image(this.x + this.blockOffsetX,this.y + this.blockOffsetY, 'rectA', this.scene, {
         isStatic: true
-    })
+    })  */
+    this.block = this.scene.matter.add.rectangle(this.x + this.blockOffsetX, this.y + this.blockOffsetY, 10, 10, { isStatic: true });
 
     this.block.scaleX = .02;
     this.block.scaleY = .1;
@@ -35,11 +36,11 @@ export default class Flipper extends Phaser.Scene  {
     this.block.visible = false;
 
     //Pivot point
-    this.pivot = this.scene.matter.add.image(this.x, this.y, null, this.scene);
+    /* this.pivot = this.scene.matter.add.image(this.x, this.y, null, this.scene);
     this.pivot.setScale(.2);
     this.pivot.setCircle(1);
-    this.pivot.setStatic(true);
-    
+    this.pivot.setStatic(true); */
+    this.pivot = this.scene.matter.add.rectangle(this.x, this.y, 10, 10, { isStatic: true, circleRadius: 1 });
     
     let rectA = Phaser.Physics.Matter.Matter.Bodies.rectangle(this.x + this.flipperOffsetX , this.y + this.flipperOffsetY, this.flipperLength, this.flipperWidth, {
         chamfer: 0,

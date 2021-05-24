@@ -11,7 +11,6 @@ export default class Object extends Phaser.Scene {
     this.texture = texture;
     this.sheet = sheet;
     this.shapes = shapes;
-    console.log(this.shapes.label);
     const obj = this.scene.matter.add.sprite(0, 0, this.sheet, this.texture, {
       shape: this.shapes,
     });

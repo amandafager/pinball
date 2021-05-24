@@ -125,29 +125,25 @@ export default class GameScene extends Phaser.Scene {
 
     const brave = window.navigator.brave;
     if(brave) {
-      console.log('brave')
       scoreTextX = this.gameWidth * 0.05; 
       scoreTextY = - 95; 
       ballsLeftTextX = this.gameWidth  * 0.78;
       ballsLeftTextY= - 95; 
     }
     else {
-      console.log('no brave')
       scoreTextX = this.gameWidth * 0.05; 
       scoreTextY = 15; 
       ballsLeftTextX = this.gameWidth  * 0.78;
       ballsLeftTextY= 15; 
     }
-
     this.scoreText = this.add.text(scoreTextX, scoreTextY, 'Score: ' + this.score, { fontSize: 18 }).setOrigin(0).setDepth(1);
-    this.ballsLeftText = this.add.text(ballsLeftTextX , ballsLeftTextY, 'Balls left: ' + this.gameBalls, { fontSize: 18}).setOrigin(0).setDepth(1);
+    this.ballsLeftText = this.add.text(ballsLeftTextX , ballsLeftTextY, 'Balls left: ' + this.gameBalls, { fontSize: 18 }).setOrigin(0).setDepth(1);
   }
 
   newGame() {  
     this.currentBall = 0 
     this.gameBalls = 3;
     this.score = 0;
-    console.log('NEW GAME');
     this.getNewBall();
     this.updateBallsLeftText();
     this.updateScoreText();
@@ -212,11 +208,11 @@ export default class GameScene extends Phaser.Scene {
   collisions() {
     this.matter.world.on('collisionstart', (event, bodyA, bodyB) => {
 
-      if(bodyA.label == 'sideSmallBumper' || bodyA.label == 'sideBumper'){
+      if(bodyA.label == 'sideSmallBumper' || bodyA.label == 'sideBumper') {
+        bodyA.gameObject.setTint(0xffd700); 
         this.soundSmallBumper.play();
       }
       if(bodyA.label == 'leftSpringSensor'){
-        console.log(this.leftSpring.y);
         this.launchLeftTimer = setInterval(() => {
           if (this.leftSpring.y <= 1230) {
             if(this.ball.getData('onLeftSpring')) { 
@@ -250,41 +246,36 @@ export default class GameScene extends Phaser.Scene {
           );
         }, 50);
       }
-
-      if (bodyA.label === 'sideBumper') {
-       bodyA.gameObject.setTint(0xffff00); 
-      }
       if (bodyA.label === 'topBumper') {
         this.star = this.add.image(bodyA.gameObject.x,  bodyA.gameObject.y - 2, 'star').setScale(1.1);
         this.star.setVisible(true);
         this.bumperHit.play();
       }
-      if (bodyA.label === 'sideSmallBumper') {
-        bodyA.gameObject.setTint(0xffff00);  
-      } 
     });
 
+    let collisionLeftSpring = 0; 
     this.matter.world.on('collisionend', (event, bodyA, bodyB) => {
-     
-      if (bodyA.label === 'sideBumper') {
-        this.score = this.score + 500;
-        this.updateScoreText();
-        bodyA.gameObject.clearTint(); 
+      if (bodyA.label === 'leftSpring') {
+        collisionLeftSpring++;
+        if (collisionLeftSpring === 1) {
+          this.score = this.score * 2;
+          this.updateScoreText();    
+        }
       }
+      if (bodyA.label === 'sideSmallBumper' || bodyA.label === 'sideBumper') {
+        bodyA.label === 'sideSmallBumper' ? this.score = this.score + 700 : this.score = this.score + 500;
+        this.updateScoreText();
+        setTimeout(() => {
+          bodyA.gameObject.clearTint(); 
+        }, 50);
+      } 
       if (bodyA.label === 'topBumper') {
         this.score = this.score + 1000;
         this.updateScoreText();
-        this.star.setVisible(false);
-      }
-      if (bodyA.label === 'sideSmallBumper') {
-        this.score = this.score + 700;
-        this.updateScoreText();
-        bodyA.gameObject.clearTint(); 
-      }
-      if (bodyA.label === 'leftSpring') {
-        this.score = this.score * 2;
-        this.updateScoreText();   
-      }    
+        setTimeout(() => {
+          this.star.setVisible(false);
+        }, 40); 
+      }  
     });
   }
 
@@ -297,10 +288,10 @@ export default class GameScene extends Phaser.Scene {
   }
 
   update() {
-    if(this.gameStarted){
+    if(this.gameStarted) {
       this.resetBall();
 
-      if(this.gameBalls === 0){
+      if(this.gameBalls === 0) {
         this.endGame();
         this.newGame(); 
       }  
