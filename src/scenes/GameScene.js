@@ -195,7 +195,7 @@ export default class GameScene extends Phaser.Scene {
   endGame(){
     this.spacePushed.enabled = false;
     this.ball.destroy(); 
-    document.querySelector('.finalScore').textContent = `finalScore: ${this.score}`;
+    document.querySelector('.finalScore').textContent = `FinalScore: ${this.score}`;
     document.querySelector('.gameOver').classList.remove('hidden');
     let startGame = document.querySelector('button');
     startGame.addEventListener('click', () => {
@@ -250,6 +250,9 @@ export default class GameScene extends Phaser.Scene {
         this.star = this.add.image(bodyA.gameObject.x,  bodyA.gameObject.y - 2, 'star').setScale(1.1);
         this.star.setVisible(true);
         this.bumperHit.play();
+        setTimeout(() => {
+          this.star.setVisible(false);
+        }, 20); 
       }
     });
 
@@ -272,9 +275,6 @@ export default class GameScene extends Phaser.Scene {
       if (bodyA.label === 'topBumper') {
         this.score = this.score + 1000;
         this.updateScoreText();
-        setTimeout(() => {
-          this.star.setVisible(false);
-        }, 40); 
       }  
     });
   }
@@ -295,6 +295,6 @@ export default class GameScene extends Phaser.Scene {
         this.endGame();
         this.newGame(); 
       }  
-    }
+    } 
   }
 }
