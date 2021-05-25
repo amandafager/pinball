@@ -1,4 +1,4 @@
-<img src="https://media.giphy.com/media/sCSpuxEO8Kj9S/giphy.gif" width="100%">
+<img src="https://media.giphy.com/media/Xbjut97XRr1aU/giphy.gif" width="100%">
 
 # Pinball
 
@@ -90,7 +90,7 @@ By: [Aseel Mohamad](https://github.com/Aseel88) & [Dante Mogrim](https://github.
 
 Tested by the following people:
 
-1. Jane Doe
+1. Martin Hansson
 2. John Doe
 3. Jane Doe
 4. John Doe
@@ -99,5 +99,5 @@ Tested by the following muggles (non-coders):
 
 1. Mikael Hagberg Stenfelt
 2. Felicia Griph
-3. Jane Doe
+3. Amanda Ternblad
 4. John Doe
