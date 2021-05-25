@@ -233,7 +233,7 @@ export default class GameScene extends Phaser.Scene {
         bodyA.gameObject.setTint(0xffd700); 
         this.soundSmallBumper.play();
       }
-      
+
       if(bodyA.label == 'leftSpringSensor'){
         this.launchLeftTimer = setInterval(() => {
           if (this.leftSpring.y <= 1230) {
@@ -249,7 +249,7 @@ export default class GameScene extends Phaser.Scene {
             );
           }
           if(this.leftSpring.y >= 1230){
-            let velocity = this.launcher.setBallVelocity(80);
+            let velocity = this.launcher.setBallVelocity(14);
             this.ball.updateVelocity(velocity.vx, velocity.vy);
             this.leftSpringLaunch.play();
             this.ball.setData('onLeftSpring', false);
@@ -314,9 +314,10 @@ export default class GameScene extends Phaser.Scene {
     if(this.gameStarted) {
       this.resetBall();
       
-      if(this.ball.y <= 30){
-        this.ball.setPosition(this.gameWidth * 0.2, this.gameHeight * 0.2);
+      if(this.ball.y <= 15){
+        console.log(this.ball.y);
         this.ball.updateVelocity(0, 10);
+        this.ball.setPosition(this.gameWidth * 0.2, this.gameHeight * 0.2);
       }
       if(this.gameBalls === 0) {
         this.endGame();
