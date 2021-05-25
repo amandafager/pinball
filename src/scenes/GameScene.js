@@ -314,7 +314,7 @@ export default class GameScene extends Phaser.Scene {
     if(this.gameStarted) {
       this.resetBall();
       
-      if(this.ball.y <= 30){
+      if(this.ball.y <= 15){
         this.ball.setPosition(this.gameWidth * 0.2, this.gameHeight * 0.2);
         this.ball.updateVelocity(0, 10);
       }
