@@ -215,7 +215,7 @@ export default class GameScene extends Phaser.Scene {
   endGame(){
     this.spacePushed.enabled = false;
     this.ball.destroy(); 
-    document.querySelector('.finalScore').textContent = `finalScore: ${this.score}`;
+    document.querySelector('.finalScore').textContent = `FinalScore: ${this.score}`;
     document.querySelector('.gameOver').classList.remove('hidden');
     let startGame = document.querySelector('button');
     startGame.addEventListener('click', () => {
@@ -322,6 +322,6 @@ export default class GameScene extends Phaser.Scene {
         this.endGame();
         this.newGame(); 
       }  
-    }
+    } 
   }
 }
