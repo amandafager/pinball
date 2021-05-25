@@ -34,16 +34,23 @@ export default class GameScene extends Phaser.Scene {
   }
 
   preload() {
+
     this.matter.world.update60Hz();
+
+    /* LOAD IMAGES */
     this.load.image('ball', ballImage);
     this.load.image('background', background);
     this.load.image('backgroundStripes', backgroundStripes);
     this.load.image('spring', spring);
     this.load.image('greenDot', greenDot);
     this.load.image('topYellowDivider', topYellowDivider);
+    this.load.image('star', star);
+
+    /* LOAD JSON AND SHEETPNG */
     this.load.atlas('sheet', sheetPng, sheetJson);
     this.load.json('shapes', shapes);
-    this.load.image('star', star);
+
+    /* LOAD AUDIO FILES */
     this.load.audio('triggerHit', soundTrigger);
     this.load.audio('startGame', soundStart);
     this.load.audio('bumperHit', soundBumperHit);
@@ -52,20 +59,29 @@ export default class GameScene extends Phaser.Scene {
   }
 
   create() {
+    
+    /* ADD AUDIO FILES TO SOUND ARRAY */
     this.soundTriggers = this.sound.add('triggerHit');
     this.soundStartGame = this.sound.add('startGame');
     this.bumperHit = this.sound.add('bumperHit');
     this.leftSpringLaunch = this.sound.add('leftSpringLaunch');
     this.soundSmallBumper = this.sound.add('smallBumper');
+
+
     const shapes = this.cache.json.get('shapes');
+    
+    /* SET WALLS AROUND THE GAME AREA AND ADD BACKGROUND */ 
     this.matter.world.setBounds(0, 0, this.gameWidth, this.gameHeight);
     this.back = this.add.image(0, 0, 'background').setOrigin(0, 0);
     this.back.scale = 1.15;
     this.backStrips = this.add.image(0, 0, 'backgroundStripes').setOrigin(0, 0);
     this.twoTimes = this.add.image(3, this.gameHeight - 150, 'sheet', '2x.png').setOrigin(0);
     
+    /* MUTE SOUND ON LOAD */
     this.sound.mute = false;
     
+
+    /* ADD KEY INPUTS / STROKES */
     this.spacePushed = this.input.keyboard.addKey('space');
     this.spacePushed.enabled = false;
     const aPushed = this.input.keyboard.addKey('A');
@@ -78,6 +94,8 @@ export default class GameScene extends Phaser.Scene {
     dPushed.on('down', function () { rightFlipper.flip(this.soundTriggers);}, this);
     dPushed.on('up', function () { rightFlipper.release(); }, this);
 
+
+    /* CREATE GAME OBJECTS */
     const rightSmallBumper = new Object(this, this.gameWidth - this.gameWidth * 0.17, this.gameHeight * 0.40, 'sheet', 'rightSmallBumper.png', shapes.rightSmallBumper);
     const leftSmallBumper = new Object(this, this.gameWidth * 0.17, this.gameHeight * 0.40, 'sheet', 'leftSmallBumper.png', shapes.leftSmallBumper);
     const blackDividerRight = new Object(this, this.gameWidth - 70, this.gameHeight - 70, 'sheet', 'black_divider.png', shapes.black_divider);
@@ -92,18 +110,17 @@ export default class GameScene extends Phaser.Scene {
     const rightRamp = new Object(this, this.gameWidth - this.gameWidth * 0.14, this.gameHeight * 0.744, 'sheet', 'rightRamp.png', shapes.rightRamp);
     const leftFlipper = new Flipper(this, this.gameWidth * 0.31, this.gameHeight * 0.87, 'left', shapes.leftTrigger, this.soundTriggers);
     const rightFlipper = new Flipper(this, this.gameWidth * 0.68, this.gameHeight * 0.87, 'right', shapes.rightTrigger, this.soundTriggers);
+    const topYellowDivider = this.matter.add.image(this.gameWidth / 2, 100, 'topYellowDivider', null, { isStatic: true, label: 'topYellowDivider' });
 
+    /* ADD SPRINGS AND SENSORS */
     let leftSpringSensor = this.add.rectangle(25, this.gameHeight - 130, 60, 10);
     this.matter.add.gameObject(leftSpringSensor, { isSensor: true, isStatic: true, label: 'leftSpringSensor'});
     this.leftSpring = this.matter.add.image(this.gameWidth - this.gameWidth + 25, this.gameHeight - 30, 'spring', null, { isStatic: true, friction: 0, label: 'leftSpring'});
     this.leftSpringLock = this.matter.add.sprite(this.leftSpring.x + 8, this.leftSpring.y - 136,'sheet','closingPinLeft.png',{shape: shapes.closingPinLeft,});
     this.launcher = new Launcher( this, this.gameWidth - 25, this.gameHeight - 40, 50, this.ball, 'spring', 'sheet', 'closingPinRight.png', shapes.closingPinRight, this.leftSpringLaunch);
 
-    const topYellowDivider = this.matter.add.image(this.gameWidth / 2, 100, 'topYellowDivider', null, { 
-      isStatic: true, 
-      label: 'topYellowDivider',
-    });
 
+    /* START GAME IF BUTTON IS CLICKED */
     let startGame = document.querySelector('button');
     startGame.addEventListener('click', () => {
       document.querySelector('.welcomeScreen').remove();
@@ -148,6 +165,7 @@ export default class GameScene extends Phaser.Scene {
     this.updateBallsLeftText();
     this.updateScoreText();
 
+    /* SHOW LOADING DOTS */
     let loadingGreenDots = 1;
     this.greenDotsGroup = this.add.group();
     setInterval(() => {
@@ -173,9 +191,10 @@ export default class GameScene extends Phaser.Scene {
       'ball',
       this.launcher, 
     );
-    this.currentBall++; 
+    this.currentBall++;    
   }
 
+  /* IF BALL IS OUT OF PLAY. ADD A NEW ONE AND UPDATE BALLS LEFT */
   resetBall() {
       if (this.gameBalls >= 1 && this.ball.y > this.gameHeight - 20 ) {
           this.gameBalls--;
@@ -192,6 +211,7 @@ export default class GameScene extends Phaser.Scene {
       } 
   } 
 
+  /* IF BALL IS OUT OF PLAY AND NO BALLS/LIFE LEFT. END THE GAME AND SHOW GAME OVER AND SCORE. */
   endGame(){
     this.spacePushed.enabled = false;
     this.ball.destroy(); 
@@ -205,6 +225,7 @@ export default class GameScene extends Phaser.Scene {
     });
   }
 
+  /* KEEP TRACK OF WHAT THE BALL COLLIDES WITH. */
   collisions() {
     this.matter.world.on('collisionstart', (event, bodyA, bodyB) => {
 
@@ -212,6 +233,7 @@ export default class GameScene extends Phaser.Scene {
         bodyA.gameObject.setTint(0xffd700); 
         this.soundSmallBumper.play();
       }
+      
       if(bodyA.label == 'leftSpringSensor'){
         this.launchLeftTimer = setInterval(() => {
           if (this.leftSpring.y <= 1230) {
@@ -250,9 +272,6 @@ export default class GameScene extends Phaser.Scene {
         this.star = this.add.image(bodyA.gameObject.x,  bodyA.gameObject.y - 2, 'star').setScale(1.1);
         this.star.setVisible(true);
         this.bumperHit.play();
-        setTimeout(() => {
-          this.star.setVisible(false);
-        }, 20); 
       }
     });
 
@@ -275,6 +294,9 @@ export default class GameScene extends Phaser.Scene {
       if (bodyA.label === 'topBumper') {
         this.score = this.score + 1000;
         this.updateScoreText();
+        setTimeout(() => {
+          this.star.setVisible(false);
+        }, 20); 
       }  
     });
   }
@@ -288,9 +310,14 @@ export default class GameScene extends Phaser.Scene {
   }
 
   update() {
+    
     if(this.gameStarted) {
       this.resetBall();
-
+      
+      if(this.ball.y <= 30){
+        this.ball.setPosition(this.gameWidth * 0.2, this.gameHeight * 0.2);
+        this.ball.updateVelocity(0, 10);
+      }
       if(this.gameBalls === 0) {
         this.endGame();
         this.newGame(); 
