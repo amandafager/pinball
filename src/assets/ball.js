@@ -40,7 +40,6 @@ export default class Ball extends Phaser.Physics.Matter.Image {
           this.setData('onStart', true) && this.setData('dead', true);
       } else if (bodyA.label == 'leftSpring') {
         if (!this.getData('onLeftSpring')) this.setData('onLeftSpring', true);
-      } else {
       }
     });
   }
