@@ -242,11 +242,7 @@ export default class GameScene extends Phaser.Scene {
               this.ball.y = this.leftSpring.y - this.leftSpring.height / 2 - this.ball.height / 2;
               this.ball.updateVelocity(0, 0);
             } 
-            this.leftSpring.setPosition(
-              this.leftSpring.x,
-              this.leftSpring.y + 2,
-              null
-            );
+            this.leftSpring.setPosition(this.leftSpring.x, this.leftSpring.y + 2, null);
           }
           if(this.leftSpring.y >= 1230){
             let velocity = this.launcher.setBallVelocity(14);
@@ -261,11 +257,7 @@ export default class GameScene extends Phaser.Scene {
         }, 50);
 
         setTimeout(() => {
-          this.leftSpring.setPosition(
-            this.leftSpring.x,
-            this.leftSpring.y = this.gameHeight - 30,
-            null
-          );
+          this.leftSpring.setPosition(this.leftSpring.x, this.leftSpring.y = this.gameHeight - 30, null);
         }, 50);
       }
       if (bodyA.label === 'topBumper') {
@@ -312,7 +304,7 @@ export default class GameScene extends Phaser.Scene {
   update() {
     if(this.gameStarted) {
       this.resetBall();
-      
+
       if(this.ball.y <= 15) {
         this.ball.updateVelocity(0, 10);
         this.ball.setPosition(this.gameWidth * 0.2, this.gameHeight * 0.2);
