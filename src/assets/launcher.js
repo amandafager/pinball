@@ -137,8 +137,8 @@ export default class Launcher {
       function () {
         clearInterval(this.startTimer);
         let velocity = this.setBallVelocity(this.pushLevel);
-        this.launchSound.play();
         if (this.ball.getData('onStart')) {
+          this.launchSound.play();
           this.ball.updateVelocity(velocity.vx, velocity.vy);
           this.ball.setData('onStart', false);
         }
