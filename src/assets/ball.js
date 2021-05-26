@@ -22,8 +22,8 @@ export default class Ball extends Phaser.Physics.Matter.Image {
     this.setDensity(0.001);
     this.setFriction(0);
     this.setData('onStart', true);
+    this.onLeftSpring = false;
     this.preUpdate();
-    this.ballCollision();
     this.launcher = launcher;
     this.launcher.attachBallOnLaunch(this);
   }
@@ -31,17 +31,6 @@ export default class Ball extends Phaser.Physics.Matter.Image {
   updateVelocity(vx, vy) {
     this.setVelocityX(vx);
     this.setVelocityY(vy);
-  }
-
-  ballCollision() {
-    this.scene.matter.world.on('collisionstart', (event, bodyA, bodyB) => {
-      if (bodyA.label === 'launcher') {
-        if (!this.getData('onStart'))
-          this.setData('onStart', true) && this.setData('dead', true);
-      } else if (bodyA.label == 'leftSpring') {
-        if (!this.getData('onLeftSpring')) this.setData('onLeftSpring', true);
-      }
-    });
   }
 
   preUpdate() {

@@ -89,6 +89,7 @@ export default class Launcher {
     this.ball.y = this.y - this.height / 2 - this.ball.height / 2;
     this.ball.setVelocity(0, 0);
     this.ball.setData('onStart', true);
+    
   }
 
   setBallVelocity(pushLevel) {
