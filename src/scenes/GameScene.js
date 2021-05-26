@@ -31,6 +31,7 @@ export default class GameScene extends Phaser.Scene {
     this.score = 0;
     this.currentBall = 0;
     this.gameStarted = false;
+    this.dubbleScore = true; 
   }
 
   preload() {
@@ -161,6 +162,7 @@ export default class GameScene extends Phaser.Scene {
     this.currentBall = 0 
     this.gameBalls = 3;
     this.score = 0;
+    this.dubbleScore = true;
     this.getNewBall();
     this.updateBallsLeftText();
     this.updateScoreText();
@@ -293,13 +295,12 @@ export default class GameScene extends Phaser.Scene {
       }
     });
 
-    let collisionLeftSpring = 0; 
     this.matter.world.on('collisionend', (event, bodyA, bodyB) => {
       if (bodyA.label === 'leftSpring') {
-        collisionLeftSpring++;
-        if (collisionLeftSpring === 1) {
+        if (this.dubbleScore) {
           this.score = this.score * 2;
-          this.updateScoreText();    
+          this.updateScoreText();
+          this.dubbleScore = false; 
         }
       }
       if (bodyA.label === 'sideSmallBumper' || bodyA.label === 'sideBumper') {
