@@ -229,49 +229,67 @@ export default class GameScene extends Phaser.Scene {
   collisions() {
     this.matter.world.on('collisionstart', (event, bodyA, bodyB) => {
 
-      if(bodyA.label == 'sideSmallBumper' || bodyA.label == 'sideBumper') {
-        bodyA.gameObject.setTint(0xffd700); 
-        this.soundSmallBumper.play();
-      }
+      switch(bodyA.label){
 
-      if(bodyA.label == 'leftSpringSensor'){
-        this.launchLeftTimer = setInterval(() => {
-          if (this.leftSpring.y <= 1230) {
-            if(this.ball.getData('onLeftSpring')) { 
-              this.ball.x = this.leftSpring.x;
-              this.ball.y = this.leftSpring.y - this.leftSpring.height / 2 - this.ball.height / 2;
-              this.ball.updateVelocity(0, 0);
-            } 
+        case 'sideSmallBumper':
+        case 'sideBumper':
+          bodyA.gameObject.setTint(0xffd700); 
+          this.soundSmallBumper.play();
+        break;
+
+        case 'launcher':
+          if (!this.ball.getData('onStart')){
+            this.ball.setData('onStart', true);
+            this.ball.setData('dead', true);
+          }
+        break;
+
+        case 'leftSpring':
+          if(!this.ball.onLeftSpring){
+            this.ball.onLeftSpring = true;
+          }
+        break;
+
+        case 'leftSpringSensor':
+          let launchLeftTimer = setInterval(() => {
+            if (this.leftSpring.y <= 1230) {
+              if(this.ball.onLeftSpring) { 
+                this.ball.x = this.leftSpring.x;
+                this.ball.y = this.leftSpring.y - this.leftSpring.height / 2 - this.ball.height / 2;
+                this.ball.updateVelocity(0, 0);
+              } 
+              this.leftSpring.setPosition(
+                this.leftSpring.x,
+                this.leftSpring.y + 2,
+                null
+              );
+            }
+            if(this.leftSpring.y >= 1230){
+              let velocity = this.launcher.setBallVelocity(14);
+              this.ball.updateVelocity(velocity.vx, velocity.vy);
+              this.leftSpringLaunch.play();
+              this.ball.onLeftSpring = false;
+              setTimeout(() => {
+                this.leftSpringLock.setPosition(this.leftSpringLock.x -  (this.leftSpringLock.x - (this.leftSpringLock.width / 2)) , this.leftSpringLock.y); 
+              }, 300);
+              clearInterval(launchLeftTimer);
+            }
+          }, 50);
+  
+          setTimeout(() => {
             this.leftSpring.setPosition(
               this.leftSpring.x,
-              this.leftSpring.y + 2,
+              this.leftSpring.y = this.gameHeight - 30,
               null
             );
-          }
-          if(this.leftSpring.y >= 1230){
-            let velocity = this.launcher.setBallVelocity(14);
-            this.ball.updateVelocity(velocity.vx, velocity.vy);
-            this.leftSpringLaunch.play();
-            this.ball.setData('onLeftSpring', false);
-            setTimeout(() => {
-              this.leftSpringLock.setPosition(this.leftSpringLock.x -  (this.leftSpringLock.x - (this.leftSpringLock.width / 2)) , this.leftSpringLock.y); 
-            }, 300);
-            clearInterval(this.launchLeftTimer);
-          }
-        }, 50);
+          }, 50);
+        break;
 
-        setTimeout(() => {
-          this.leftSpring.setPosition(
-            this.leftSpring.x,
-            this.leftSpring.y = this.gameHeight - 30,
-            null
-          );
-        }, 50);
-      }
-      if (bodyA.label === 'topBumper') {
-        this.star = this.add.image(bodyA.gameObject.x,  bodyA.gameObject.y - 2, 'star').setScale(1.1);
-        this.star.setVisible(true);
-        this.bumperHit.play();
+        case 'topBumper':
+          this.star = this.add.image(bodyA.gameObject.x,  bodyA.gameObject.y - 2, 'star').setScale(1.1);
+          this.star.setVisible(true);
+          this.bumperHit.play();
+        break;
       }
     });
 

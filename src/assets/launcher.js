@@ -84,11 +84,12 @@ export default class Launcher {
   }
 
   attachBallOnLaunch(ball) {
-    this.ball = ball;
-    this.ball.x = this.x;
-    this.ball.y = this.y - this.height / 2 - this.ball.height / 2;
-    this.ball.setVelocity(0, 0);
-    this.ball.setData('onStart', true);
+    // this.ball = ball;
+    // this.ball.x = this.x;
+    // this.ball.y = this.y - this.height / 2 - this.ball.height / 2;
+    // this.ball.setVelocity(0, 0);
+    // this.ball.setData('onStart', true);
+    
   }
 
   setBallVelocity(pushLevel) {
