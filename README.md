@@ -91,13 +91,13 @@ By: [Aseel Mohamad](https://github.com/Aseel88) & [Dante Mogrim](https://github.
 Tested by the following people:
 
 1. Martin Hansson
-2. John Doe
-3. Jane Doe
-4. John Doe
+2. Rikard Segerkvist
+3. Moa Berg
+4. Gilda Eklöf
 
 Tested by the following muggles (non-coders):
 
 1. Mikael Hagberg Stenfelt
 2. Felicia Griph
 3. Amanda Ternblad
-4. John Doe
+4. Axel Carlsson
