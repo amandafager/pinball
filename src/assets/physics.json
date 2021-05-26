@@ -106,7 +106,7 @@
     "label": "topBumper",
     "isStatic": true,
     "density": 0.10000000149011612,
-    "restitution": 0.7,
+    "restitution": 0,
     "friction": 0.10000000149011612,
     "frictionAir": 0.009999999776482582,
     "frictionStatic": 0.5,
