@@ -101,3 +101,7 @@ Tested by the following muggles (non-coders):
 2. Felicia Griph
 3. Amanda Ternblad
 4. Axel Carlsson
+
+# License
+
+This project is licensed under the MIT License - see the LICENSE file for details
