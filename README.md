@@ -13,11 +13,11 @@ Visit link to play our pinball game [https://yrgo-pinball.netlify.app](https://y
 1. Clone repository
 
 ```
-git clone https://github.com/danielmedb/pinball2.0.git
+git clone https://github.com/amandafager/pinball.git
 ```
 
 ```
-cd path/to/project/folder/pinball2.0
+cd path/to/project/folder/pinball
 ```
 
 2. Install dependencies
