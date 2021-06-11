@@ -6,8 +6,6 @@ A desktop pinball game built with Phaser 3 - A 2D WebGL renderer with a built-in
 
 Visit link to play our pinball game [https://yrgo-pinball.netlify.app](https://yrgo-pinball.netlify.app/)
 
-<br>
-
 # Installation
 
 1. Clone repository
@@ -33,8 +31,6 @@ npm run start
 ```
 
 4. Open [http://localhost:8000 ](http://localhost:8000) in your browser
-
-<br>
 
 # Changelog
 
@@ -65,8 +61,6 @@ npm run start
 
 </details>
 
-<br>
-
 # Code Review
 
 By: [Aseel Mohamad](https://github.com/Aseel88) & [Dante Mogrim](https://github.com/dantemogrim):
@@ -83,8 +77,6 @@ By: [Aseel Mohamad](https://github.com/Aseel88) & [Dante Mogrim](https://github.
 10. `star.png` is also currently 1,2 MB in size. Could be reduced a bit.
 
 > "Amazing work, you two! We were very impressed with what you've accomplished together. You should be proud! :star2: Nice touch with using JSON to render your sprites. Highly nostalgic! :heart_eyes_cat: " / Aseel & Dante
-
-<br>
 
 # Testers
 
