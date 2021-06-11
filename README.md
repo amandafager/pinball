@@ -1,5 +1,4 @@
-<img src="https://media.giphy.com/media/Xbjut97XRr1aU/giphy.gif" width="100%">
-
+![pinballgame](https://user-images.githubusercontent.com/70512941/121678594-a4f0c300-cab7-11eb-8194-6b485cc29c27.gif)
 # Pinball
 
 A desktop pinball game built with Phaser 3 - A 2D WebGL renderer with a built-in game engine. In this project we have used Matter plugin witch provides the ability to use the Matter JS Physics Engine.
